@@ -13,7 +13,7 @@ and open the template in the editor.
         <?php if(isset($message))
             echo "<font color='red'>$message</font><br>";
         ?>
-        <form method="post" action="<?php echo site_url("GuestController/login");?>">
+        <form method="post" action="<?php echo site_url("Guest/login");?>">
             Username: <input type="text" name="username" required/> <br/>
             Password: <input type="password" name="password" required/> <br/>
             <input type="submit" value="Login"/>
