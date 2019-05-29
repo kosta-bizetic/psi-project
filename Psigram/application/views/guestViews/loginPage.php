@@ -15,8 +15,9 @@ and open the template in the editor.
         ?>
         <form method="post" action="<?php echo site_url("Guest/login");?>">
             Username: <input type="text" name="username" required/> <br/>
-            Password: <input type="password" name="password" required/> <br/>
+            Password: <input type="password" name="password" autofill required/> <br/>
             <input type="submit" value="Login"/>
         </form>
+        <a href="<?php echo site_url("Guest/registration");?>">Register</a>
     </body>
 </html>

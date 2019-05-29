@@ -33,7 +33,7 @@ class Guest extends CI_Controller {
     }
     
     public function index($message=null) {
-        $this->load->view("loginPage.php", ['message' => $message]);
+        $this->load->view("guestViews/loginPage.php", ['message' => $message]);
     }
     
     public function login() {
@@ -74,4 +74,7 @@ class Guest extends CI_Controller {
         }
     }
     
+    public function registration() {
+        $this->load->view("guestViews/registrationPage");
+    }
 }
