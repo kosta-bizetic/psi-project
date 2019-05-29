@@ -15,7 +15,7 @@ and open the template in the editor.
             <input type="submit" value="Search">
         </form>
         
-        <a href="<?php echo site_url("User/viewProfile")?>"> Profil </a>
+        <a href="<?php echo site_url("User/profile")?>"> Profil </a>
         <br>
         <a href="<?php echo site_url("User/logOut")?>"> Log Out </a>
     </body>

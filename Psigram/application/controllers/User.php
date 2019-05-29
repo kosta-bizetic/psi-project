@@ -17,6 +17,10 @@ class User extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
+        if (! ($this->session->has_userdata('user')) || 
+                ! ($this->session->userdata['user']->type == 'u')) {
+            redirect();
+        }
         $this->data['title'] = 'Psigram';
     }
     
@@ -26,6 +30,27 @@ class User extends CI_Controller {
     
     public function feed() {
         $this->load->view('templates/UserHeader.php', $this->data);
+    }
+    
+    public function profile() {
+        $this->load->view('templates/UserHeader.php', $this->data);
+        
+        $user = $this->session->userdata['user'];
+        $this->data['user'] = $user;
+        $this->data['num_posts'] = $this->db
+                ->from("Post")
+                ->where("id_user", $user->id_user)
+                ->count_all_results();
+        $this->data['num_followers'] = $this->db
+                ->from("Follows")
+                ->where("id_user_followed", $user->id_user)
+                ->count_all_results();
+        $this->data['num_following'] = $this->db
+                ->from("Follows")
+                ->where("id_user_following", $user->id_user)
+                ->count_all_results();
+        
+        $this->load->view('templates/Profile.php', $this->data);
     }
     
     public function logOut() {
