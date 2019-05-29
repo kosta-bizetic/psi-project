@@ -38,7 +38,7 @@ class GuestController extends CI_Controller {
                         checkPassword($this->input->post('password'))){
                     
                     $this->session->set_userdata
-                            ('autor',$this->UserModel->user);
+                            ('user',$this->UserModel->user);
                     
                     switch ($this->UserModel->user->type) {
                         case 'a':

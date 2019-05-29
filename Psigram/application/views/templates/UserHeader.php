@@ -16,5 +16,7 @@ and open the template in the editor.
         </form>
         
         <a href="<?php echo site_url("User/viewProfile")?>"> Profil </a>
+        <br>
+        <a href="<?php echo site_url("User/logOut")?>"> Log Out </a>
     </body>
 </html>

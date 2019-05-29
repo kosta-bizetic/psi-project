@@ -20,7 +20,16 @@ class User extends CI_Controller {
         $this->data['title'] = 'Psigram';
     }
     
+    public function index() {
+        $this->feed();
+    }
+    
     public function feed() {
         $this->load->view('templates/UserHeader.php', $this->data);
+    }
+    
+    public function logOut() {
+        $this->session->unset_userdata('user');
+        redirect();
     }
 }
