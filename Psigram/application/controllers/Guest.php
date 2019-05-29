@@ -77,4 +77,8 @@ class Guest extends CI_Controller {
     public function registration() {
         $this->load->view("guestViews/registrationPage");
     }
+    
+    public function register() {
+        
+    }
 }
