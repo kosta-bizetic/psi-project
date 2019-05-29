@@ -16,6 +16,20 @@ class Guest extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model("UserModel");
+        
+        if ($this->session->has_userdata('user')) {
+            switch ($this->session->userdata('user')->type) {
+                case 'a':
+                    Redirect("Admin");
+                    break;
+                case 'b':
+                    Redirect("Business");
+                    break;
+                case 'u':
+                    Redirect("User");
+                    break;
+            }
+        }
     }
     
     public function index($message=null) {
