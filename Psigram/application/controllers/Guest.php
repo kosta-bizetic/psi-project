@@ -11,7 +11,7 @@
  *
  * @author LukaDojcilovic
  */
-class GuestController extends CI_Controller {
+class Guest extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
