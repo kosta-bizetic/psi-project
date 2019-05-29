@@ -7,18 +7,14 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Biza</title>
+        <title><?php echo $title ?></title>
     </head>
     <body>
-        <form action="<?php echo site_url("UserController/search");?>">
+        <form action="<?php echo site_url("User/search");?>">
             <input type="text" name="search_text" placeholder="Search">
             <input type="submit" value="Search">
         </form>
-        <form action="<?php echo site_url("UserController/viewProfile")?>">
-            <input type="submit" value="Profil">
-        </form>
-        <?php
         
-        ?>
+        <a href="<?php echo site_url("User/viewProfile")?>"> Profil </a>
     </body>
 </html>

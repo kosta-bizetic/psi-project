@@ -11,13 +11,16 @@
  *
  * @author Kosta
  */
-class UserController extends CI_Controller {
-    //put your code here
+class User extends CI_Controller {
+    
+    var $data = array();
+    
     public function __construct() {
         parent::__construct();
+        $this->data['title'] = 'Psigram';
     }
     
     public function feed() {
-        $this->load->view('templates/UserHeader.php');
+        $this->load->view('templates/UserHeader.php', $this->data);
     }
 }
