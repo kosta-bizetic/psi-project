@@ -10,9 +10,13 @@ and open the template in the editor.
         <title>Psigram</title>
     </head>
     <body>
+        <?php if(isset($message))
+            echo "<font color='red'>$message</font><br>";
+        ?>
         <form method="post" action="<?php echo site_url("GuestController/login");?>">
             Username: <input type="text" name="username"/> <br/>
             Password: <input type="password" name="password"/> <br/>
+            <input type="submit" value="Login"/>
         </form>
     </body>
 </html>
