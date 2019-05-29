@@ -17,5 +17,7 @@ class UserController extends CI_Controller {
         parent::__construct();
     }
     
-    
+    public function feed() {
+        $this->load->view('templates/UserHeader.php');
+    }
 }
