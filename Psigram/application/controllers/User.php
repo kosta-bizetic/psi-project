@@ -29,7 +29,7 @@ class User extends CI_Controller {
     }
 
     public function index() {
-        $this->feed();
+        redirect('user/feed');
     }
 
     public function feed() {

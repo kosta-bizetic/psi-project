@@ -19,15 +19,10 @@ class UserModel extends CI_Model {
     }
 
     public function getUser($username) {
-        $result = $this->db->where('username', $username)
-                    ->get('user');
+        $this->user = $this->db->where('username', $username)
+                               ->get('user')->row();
 
-        $this->user = $result->row();
-
-        if($this->user == NULL){
-            return false;
-        }
-        return true;
+        return $this->user != NULL;
     }
 
     public function checkPassword($password) {
@@ -35,23 +30,16 @@ class UserModel extends CI_Model {
     }
 
     public function usernameExists($username) {
-        $result = $this->db->where('username', $username)
-                    ->get('user');
-
-        if($result->row() == NULL){
-            return false;
-        }
-        return true;
+        return $this->db->where('username', $username)
+                        ->get('user')
+                        ->row() != NULL;
     }
 
     public function emailExists($email) {
-        $result = $this->db->where('email', $email)
-                    ->get('user');
-
-        if($result->row() == NULL){
-            return false;
-        }
-        return true;
+        return $this->db
+                    ->where('email', $email)
+                    ->get('user')
+                    ->row() != NULL;
     }
 
     public function addUser($data) {
