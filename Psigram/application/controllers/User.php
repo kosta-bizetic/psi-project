@@ -33,7 +33,7 @@ class User extends CI_Controller {
     }
 
     public function feed() {
-        $this->data['posts'] = []; // TODO: Get posts from database here.
+        $this->data['posts'] = $this->PostModel->getAllPosts();
 
         $this->load->view('user/feed.php', $this->data);
     }

@@ -13,7 +13,7 @@
         ?>
         <?php
             foreach ($posts as $post) {
-                $this->load->view('user/partial/singlePost');
+                $this->load->view('user/partial/singlePost', ['image_name' => $post->image_name]);
             }
         ?>
     </body>
