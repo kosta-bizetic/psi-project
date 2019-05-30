@@ -61,4 +61,25 @@ class UserModel extends CI_Model {
         return $this->getUser($data['username']);
     }
 
+    public function getNumberOfPosts($user_id) {
+        return $this->db
+                    ->from("Post")
+                    ->where("id_user", $user_id)
+                    ->count_all_results();
+    }
+
+    public function getNumberOfFollowers($user_id) {
+        return $this->db
+                    ->from("Follows")
+                    ->where("id_user_followed", $user_id)
+                    ->count_all_results();
+    }
+
+    public function getNumberOfFollowing($user_id) {
+        return $this->db
+                    ->from("Follows")
+                    ->where("id_user_following", $user_id)
+                    ->count_all_results();
+    }
+
 }
