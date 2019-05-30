@@ -59,7 +59,7 @@ class User extends CI_Controller {
         } else {
             $this->PostModel->addPost($config['file_name'].$this->upload->data('file_ext'), $user->id_user );
 
-            redirect("User/profile");
+            redirect("User/feed");
         }
     }
 
