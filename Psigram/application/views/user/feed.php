@@ -11,5 +11,10 @@
         <?php
             $this->load->view('user/partial/header.php', $this->data);
         ?>
+        <?php
+            foreach ($posts as $post) {
+                $this->load->view('user/partial/singlePost');
+            }
+        ?>
     </body>
 </html>
