@@ -18,6 +18,7 @@ class PostModel extends CI_Model {
     }
 
     public function getAllPosts() {
+        $this->db->order_by('id_post DESC');
         return $this->db->get('post')->result();
     }
 
