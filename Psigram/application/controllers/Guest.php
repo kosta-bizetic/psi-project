@@ -18,44 +18,22 @@ class Guest extends CI_Controller {
         $this->load->model("UserModel");
 
         if ($this->session->has_userdata('user')) {
-            switch ($this->session->userdata('user')->type) {
-                case 'a':
-                    Redirect("Admin");
-                    break;
-                case 'b':
-                    Redirect("Business");
-                    break;
-                case 'u':
-                    Redirect("User");
-                    break;
-            }
+            $this->redirectToType($this->session->userdata('user')->type);
         }
     }
 
-    public function show($page, $message=null) {
-        $this->load->view("guestViews/guestHeader.php");
-        $this->load->view($page, ['message' => $message]);
+    public function index() {
+        $this->login();
     }
 
-    public function index($message=null) {
-        $this->show("guestViews/loginPage.php", $message);
+    public function login($message=null) {
+        $data['title'] = 'Psigram';
+        $data['message'] = $message;
+
+        $this->load->view('guest/login', $data);
     }
 
-    public function redirectToType($type) {
-        switch ($type) {
-            case 'a':
-                Redirect("Admin");
-                break;
-            case 'b':
-                Redirect("Business");
-                break;
-            case 'u':
-                Redirect("User");
-                break;
-        }
-    }
-
-    public function login() {
+    public function loginHandler() {
         $this->form_validation->
            set_rules('username', "username", "required");
         $this->form_validation->
@@ -75,19 +53,22 @@ class Guest extends CI_Controller {
 
                     $this->redirectToType($this->UserModel->user->type);
                 } else {
-                    $this->index('Incorrect password.');
+                    $this->index('Incorrect password.<br/>');
                 }
             } else {
-                $this->index('Incorrect username.');
+                $this->index('Incorrect username.<br/>');
             }
         }
     }
 
     public function registration($message=null) {
-        $this->show("guestViews/registrationPage", $message);
+        $data['title'] = 'Psigram';
+        $data['message'] = $message;
+
+        $this->load->view("guest/registration", $data);
     }
 
-    public function register() {
+    public function registrationHandler() {
         $data = array(
             'username' => $this->input->post('username'),
             'password' => $this->input->post('password'),
@@ -119,6 +100,20 @@ class Guest extends CI_Controller {
             } else {
                 $this->registration("There was an error. Please try again.");
             }
+        }
+    }
+
+    private function redirectToType($type) {
+        switch ($type) {
+            case 'a':
+                Redirect("Admin");
+                break;
+            case 'b':
+                Redirect("Business");
+                break;
+            case 'u':
+                Redirect("User");
+                break;
         }
     }
 }
