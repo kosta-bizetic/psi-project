@@ -38,7 +38,7 @@ class User extends CI_Controller {
             $this->load->view('templates/AddPost.php', $this->data);
         } else {
             $user = $this->session->userdata['user'];
-            $config['upload_path']          = '..//Uploads//';
+            $config['upload_path']          = 'uploads//';
             $config['file_name']            = $user->username."_".time();
             $config['allowed_types']        = 'gif|jpg|png';
             $config['max_size']             = 2000;
@@ -53,9 +53,7 @@ class User extends CI_Controller {
 
                     $this->load->view('templates/UserHeader.php', $this->data);
                     $this->load->view('templates/AddPost.php', $this->data);
-            }
-            else
-            {
+            } else {
                     // $data = array('upload_data' => $this->upload->data());
 
                     redirect("User/feed");
