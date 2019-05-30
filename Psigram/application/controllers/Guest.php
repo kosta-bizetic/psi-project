@@ -32,8 +32,13 @@ class Guest extends CI_Controller {
         }
     }
 
+    public function show($page, $message=null) {
+        $this->load->view("guestViews/guestHeader.php");
+        $this->load->view($page, ['message' => $message]);
+    }
+
     public function index($message=null) {
-        $this->load->view("guestViews/loginPage.php", ['message' => $message]);
+        $this->show("guestViews/loginPage.php", $message);
     }
 
     public function redirectToType($type) {
@@ -79,7 +84,7 @@ class Guest extends CI_Controller {
     }
 
     public function registration($message=null) {
-        $this->load->view("guestViews/registrationPage", ['message' => $message]);
+        $this->show("guestViews/registrationPage", $message);
     }
 
     public function register() {
