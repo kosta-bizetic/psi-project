@@ -46,8 +46,8 @@ class User extends CI_Controller {
         $config['file_name']            = $user->username."_".time();
         $config['allowed_types']        = 'gif|jpg|png';
         $config['max_size']             = 2000;
-        $config['max_width']            = 1024;
-        $config['max_height']           = 768;
+        $config['max_width']            = 1024*4;
+        $config['max_height']           = 768*4;
 
         $this->load->library('upload', $config);
 
