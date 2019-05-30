@@ -10,12 +10,15 @@ and open the template in the editor.
         <title>Psigram</title>
     </head>
     <body>
+        <?php if(isset($message))
+            echo "<font color='red'>$message</font>";
+        ?>
         <form method="post" action="<?php echo site_url("Guest/register");?>">
             Username: <input type="text" name="username" required/> <br/>
             Password: <input type="password" name="password" autofill required/> <br/>
             Name: <input type="text" name="name" required/> <br/>
-            Surname: <input type="text" name="username" required/> <br/>
-            Email: <input type="email" name="username" required/> <br/>
+            Surname: <input type="text" name="surname" required/> <br/>
+            Email: <input type="email" name="email" required/> <br/>
             Date of birth: <input type="date" name="date_of_birth" required> <br/>
             Gender:
             <input type="radio" name="gender" value="m" required> Male 
