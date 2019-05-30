@@ -29,57 +29,48 @@ class User extends CI_Controller {
     }
 
     public function feed() {
-        $this->load->view('templates/UserHeader.php', $this->data);
+        $this->load->view('user/feed.php', $this->data);
     }
 
     public function addPost() {
-        if (empty($this->input->post('upload'))) {
-            $this->load->view('templates/UserHeader.php', $this->data);
-            $this->load->view('templates/AddPost.php', $this->data);
+        $this->load->view('user/addPost.php', $this->data);
+    }
+
+    public function addPostHandler() {
+        $user = $this->session->userdata['user'];
+        $config['upload_path']          = 'uploads//';
+        $config['file_name']            = $user->username."_".time();
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 2000;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('image')) {
+                $this->data['error'] = $this->upload->display_errors();
+                $this->addPost();
         } else {
-            $user = $this->session->userdata['user'];
-            $config['upload_path']          = 'uploads//';
-            $config['file_name']            = $user->username."_".time();
-            $config['allowed_types']        = 'gif|jpg|png';
-            $config['max_size']             = 2000;
-            $config['max_width']            = 1024;
-            $config['max_height']           = 768;
-
-            $this->load->library('upload', $config);
-
-            if ( ! $this->upload->do_upload('image'))
-            {
-                    $this->data['error'] = $this->upload->display_errors();
-
-                    $this->load->view('templates/UserHeader.php', $this->data);
-                    $this->load->view('templates/AddPost.php', $this->data);
-            } else {
-                    // $data = array('upload_data' => $this->upload->data());
-
-                    redirect("User/feed");
-            }
+            redirect("User/profile");
         }
     }
 
     public function profile() {
-        $this->load->view('templates/UserHeader.php', $this->data);
-
-        $user = $this->session->userdata['user'];
-        $this->data['user'] = $user;
-        $this->data['num_posts'] = $this->db
-                ->from("Post")
-                ->where("id_user", $user->id_user)
-                ->count_all_results();
+        $user                       = $this->session->userdata['user'];
+        $this->data['user']         = $user;
+        $this->data['num_posts']    = $this->db
+                                        ->from("Post")
+                                        ->where("id_user", $user->id_user)
+                                        ->count_all_results();
         $this->data['num_followers'] = $this->db
-                ->from("Follows")
-                ->where("id_user_followed", $user->id_user)
-                ->count_all_results();
+                                        ->from("Follows")
+                                        ->where("id_user_followed", $user->id_user)
+                                        ->count_all_results();
         $this->data['num_following'] = $this->db
-                ->from("Follows")
-                ->where("id_user_following", $user->id_user)
-                ->count_all_results();
-
-        $this->load->view('templates/Profile.php', $this->data);
+                                        ->from("Follows")
+                                        ->where("id_user_following", $user->id_user)
+                                        ->count_all_results();
+        $this->load->view('user/profile.php', $this->data);
     }
 
     public function logOut() {
