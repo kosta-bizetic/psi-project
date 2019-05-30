@@ -21,4 +21,11 @@ class PostModel extends CI_Model {
         return $this->db->get('post')->result();
     }
 
+    public function addPost($image_name, $id_user) {
+        $data = array(
+            'image_name' => $image_name,
+            'id_user' => $id_user
+        );
+        $this->db->insert('post', $data);
+    }
 }

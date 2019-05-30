@@ -21,7 +21,9 @@ class User extends CI_Controller {
                 ! ($this->session->userdata['user']->type == 'u')) {
             redirect();
         }
-        
+
+        $this->load->model("PostModel");
+
         $this->data['title'] = 'Psigram';
     }
 
@@ -52,6 +54,8 @@ class User extends CI_Controller {
                 $this->data['error'] = $this->upload->display_errors();
                 $this->addPost();
         } else {
+            $this->PostModel->addPost($config['file_name'], $user->id_user );
+
             redirect("User/profile");
         }
     }

@@ -55,8 +55,7 @@ class UserModel extends CI_Model {
     }
 
     public function addUser($data) {
-        $this->db->set($data);
-        $this->db->insert('user');
+        $this->db->insert('user', $data);
 
         return $this->getUser($data['username']);
     }
