@@ -21,6 +21,7 @@ class User extends CI_Controller {
                 ! ($this->session->userdata['user']->type == 'u')) {
             redirect();
         }
+        
         $this->data['title'] = 'Psigram';
     }
 

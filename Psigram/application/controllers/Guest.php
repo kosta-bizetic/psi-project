@@ -13,13 +13,17 @@
  */
 class Guest extends CI_Controller {
 
+    var $data = array();
+
     public function __construct() {
         parent::__construct();
-        $this->load->model("UserModel");
-
         if ($this->session->has_userdata('user')) {
             $this->redirectToType($this->session->userdata('user')->type);
         }
+
+        $this->load->model("UserModel");
+
+        $this->data['title'] = 'Psigram';
     }
 
     public function index() {
@@ -27,10 +31,9 @@ class Guest extends CI_Controller {
     }
 
     public function login($message=null) {
-        $data['title'] = 'Psigram';
-        $data['message'] = $message;
+        $this->data['message'] = $message;
 
-        $this->load->view('guest/login', $data);
+        $this->load->view('guest/login', $this->data);
     }
 
     public function loginHandler() {
@@ -53,19 +56,18 @@ class Guest extends CI_Controller {
 
                     $this->redirectToType($this->UserModel->user->type);
                 } else {
-                    $this->index('Incorrect password.<br/>');
+                    $this->login('Incorrect password.<br/>');
                 }
             } else {
-                $this->index('Incorrect username.<br/>');
+                $this->login('Incorrect username.<br/>');
             }
         }
     }
 
     public function registration($message=null) {
-        $data['title'] = 'Psigram';
         $data['message'] = $message;
 
-        $this->load->view("guest/registration", $data);
+        $this->load->view("guest/registration", $this->data);
     }
 
     public function registrationHandler() {
