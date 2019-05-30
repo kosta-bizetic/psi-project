@@ -23,6 +23,7 @@ class User extends CI_Controller {
         }
 
         $this->load->model("PostModel");
+        $this->load->model('UserModel');
 
         $this->data['title'] = 'Psigram';
     }
@@ -61,20 +62,11 @@ class User extends CI_Controller {
     }
 
     public function profile() {
-        $user                       = $this->session->userdata['user'];
-        $this->data['user']         = $user;
-        $this->data['num_posts']    = $this->db
-                                        ->from("Post")
-                                        ->where("id_user", $user->id_user)
-                                        ->count_all_results();
-        $this->data['num_followers'] = $this->db
-                                        ->from("Follows")
-                                        ->where("id_user_followed", $user->id_user)
-                                        ->count_all_results();
-        $this->data['num_following'] = $this->db
-                                        ->from("Follows")
-                                        ->where("id_user_following", $user->id_user)
-                                        ->count_all_results();
+        $user = $this->session->userdata['user'];
+        $this->data['user'] = $user;
+        $this->data['num_posts'] = $this->UserModel->getNumberOfPosts($user->id_user);
+        $this->data['num_followers'] = $this->UserModel->getNumberOfFollowers($user->id_user);
+        $this->data['num_following'] = $this->UserModel->getNumberOfFollowing($user->id_user);
         $this->load->view('user/profile.php', $this->data);
     }
 
