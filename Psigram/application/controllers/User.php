@@ -57,7 +57,7 @@ class User extends CI_Controller {
                 $this->data['error'] = $this->upload->display_errors();
                 $this->addPost();
         } else {
-            $this->PostModel->addPost($config['file_name'], $user->id_user );
+            $this->PostModel->addPost($config['file_name'].$this->upload->data('file_ext'), $user->id_user );
 
             redirect("User/profile");
         }
