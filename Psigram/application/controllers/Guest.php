@@ -27,7 +27,7 @@ class Guest extends CI_Controller {
     }
 
     public function index() {
-        $this->login();
+        redirect('guest/login');
     }
 
     public function login($message=null) {
