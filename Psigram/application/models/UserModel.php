@@ -56,8 +56,6 @@ class UserModel extends CI_Model {
 
     public function addUser($data) {
         $this->db->insert('user', $data);
-
-        return $this->getUser($data['username']);
     }
 
     public function getNumberOfPosts($user_id) {

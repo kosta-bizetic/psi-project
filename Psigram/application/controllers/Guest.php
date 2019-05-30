@@ -65,7 +65,7 @@ class Guest extends CI_Controller {
     }
 
     public function registration($message=null) {
-        $data['message'] = $message;
+        $this->data['message'] = $message;
 
         $this->load->view("guest/registration", $this->data);
     }
@@ -94,7 +94,9 @@ class Guest extends CI_Controller {
         if ($message != "") {
             $this->registration($message);
         } else {
-            if ($this->UserModel->addUser($data)) {;
+            $this->UserModel->addUser($data);
+
+            if ($this->UserModel->getUser($data['username'])) {
                 $this->session->set_userdata
                             ('user',$this->UserModel->user);
 
