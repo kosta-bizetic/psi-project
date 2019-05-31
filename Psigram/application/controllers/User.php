@@ -23,8 +23,8 @@ class User extends CI_Controller {
             redirect();
         }
 
-        $this->load->model("PostModel");
-        $this->load->model('UserModel');
+        $this->load->model('MPost');
+        $this->load->model('MUser');
         $this->load->model('MFollows');
 
         $this->data['title'] = 'Psigram';
@@ -37,7 +37,7 @@ class User extends CI_Controller {
     }
 
     public function feed() {
-        $this->data['posts'] = $this->PostModel->getPostsForFeed($this->user);
+        $this->data['posts'] = $this->MPost->getPostsForFeed($this->user);
 
         $this->load->view('user/feed.php', $this->data);
     }
@@ -60,20 +60,20 @@ class User extends CI_Controller {
                 $this->data['error'] = $this->upload->display_errors();
                 $this->addPost();
         } else {
-            $this->PostModel->addPost($config['file_name'].$this->upload->data('file_ext'), $this->user->id_user );
+            $this->MPost->addPost($config['file_name'].$this->upload->data('file_ext'), $this->user->id_user );
 
             redirect("User/feed");
         }
     }
 
     public function profile($user_id) {
-        $profile_user = $this->UserModel->getUserById($user_id);
+        $profile_user = $this->MUser->getUserById($user_id);
         $this->data['user'] = $profile_user;
-        $this->data['follows'] = $this->UserModel->getFollows($this->user->id_user, $profile_user->id_user);
-        $this->data['num_posts'] = $this->UserModel->getNumberOfPosts($profile_user->id_user);
-        $this->data['num_followers'] = $this->UserModel->getNumberOfFollowers($profile_user->id_user);
-        $this->data['num_following'] = $this->UserModel->getNumberOfFollowing($profile_user->id_user);
-        $this->data['posts'] = $this->PostModel->getPostsForProfile($profile_user->id_user);
+        $this->data['follows'] = $this->MFollows->getFollows($this->user->id_user, $profile_user->id_user);
+        $this->data['num_posts'] = $this->MPost->getNumberOfPosts($profile_user->id_user);
+        $this->data['num_followers'] = $this->MFollows->getNumberOfFollowers($profile_user->id_user);
+        $this->data['num_following'] = $this->MFollows->getNumberOfFollowing($profile_user->id_user);
+        $this->data['posts'] = $this->MPost->getPostsForProfile($profile_user->id_user);
         $this->load->view('user/profile.php', $this->data);
     }
 
@@ -81,4 +81,11 @@ class User extends CI_Controller {
         $this->session->unset_userdata('user');
         redirect();
     }
+
+    public function search() {
+        $this->data['users'] = $this->MUser->getAllUsers();
+
+        $this->view->load('user/search', $this->data);
+    }
+
 }

@@ -21,7 +21,7 @@ class Guest extends CI_Controller {
             $this->redirectToType($this->session->userdata('user')->type);
         }
 
-        $this->load->model("UserModel");
+        $this->load->model('MUser');
 
         $this->data['title'] = 'Psigram';
     }
@@ -45,7 +45,7 @@ class Guest extends CI_Controller {
         if ($this->form_validation->run() == FALSE){
             $this->index();
         } else {
-            $user = $this->UserModel->getUserByUsername($this->input->post('username'));
+            $user = $this->MUser->getUserByUsername($this->input->post('username'));
 
             if($user != null){
                 if ($user->password == $this->input->post('password')){
@@ -82,18 +82,18 @@ class Guest extends CI_Controller {
 
         $message = "";
 
-        if ($this->UserModel->usernameExists($data['username'])) {
+        if ($this->MUser->usernameExists($data['username'])) {
             $message .= "Username already exists. <br/>";
         }
-        if ($this->UserModel->emailExists($data['email'])) {
+        if ($this->MUser->emailExists($data['email'])) {
             $message .= "Email already exists. <br/>";
         }
 
         if ($message != "") {
             $this->registration($message);
         } else {
-            $this->UserModel->addUser($data);
-            $user = $this->UserModel->getUserByUsername($data['username']);
+            $this->MUser->addUser($data);
+            $user = $this->MUser->getUserByUsername($data['username']);
 
             if ($user != null) {
                 $this->session->set_userdata

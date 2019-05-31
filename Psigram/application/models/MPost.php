@@ -11,7 +11,7 @@
  *
  * @author LukaDojcilovic
  */
-class PostModel extends CI_Model {
+class MPost extends CI_Model {
 
     public function __construct() {
         parent::__construct();
@@ -45,6 +45,12 @@ class PostModel extends CI_Model {
                     ->order_by('id_post DESC')
                     ->get()
                     ->result();
+    }
+
+    public function getNumberOfPosts($user_id) {
+        return $this->db->from("Post")
+                        ->where("id_user", $user_id)
+                        ->count_all_results();
     }
 
     public function addPost($image_name, $id_user) {
