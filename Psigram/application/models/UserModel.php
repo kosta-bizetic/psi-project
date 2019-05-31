@@ -16,9 +16,16 @@ class UserModel extends CI_Model {
         parent::__construct();
     }
 
-    public function getUser($username) {
+    public function getUserByUsername($username) {
         return $this->db
                     ->where('username', $username)
+                    ->get('user')
+                    ->row();
+    }
+
+    public function getUserById($id_user) {
+        return $this->db
+                    ->where('id_user', $id_user)
                     ->get('user')
                     ->row();
     }

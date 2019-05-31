@@ -27,7 +27,7 @@ class Guest extends CI_Controller {
     }
 
     public function index() {
-        redirect('guest/login');
+        $this->login();
     }
 
     public function login($message=null) {
@@ -45,7 +45,7 @@ class Guest extends CI_Controller {
         if ($this->form_validation->run() == FALSE){
             $this->index();
         } else {
-            $user = $this->UserModel->getUser($this->input->post('username'));
+            $user = $this->UserModel->getUserByUsername($this->input->post('username'));
 
             if($user != null){
                 if ($user->password == $this->input->post('password')){
@@ -93,7 +93,7 @@ class Guest extends CI_Controller {
             $this->registration($message);
         } else {
             $this->UserModel->addUser($data);
-            $user = $this->UserModel->getUser($data['username']);
+            $user = $this->UserModel->getUserByUsername($data['username']);
 
             if ($user != null) {
                 $this->session->set_userdata

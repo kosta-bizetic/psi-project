@@ -42,6 +42,15 @@ class PostModel extends CI_Model {
                     ->result();
     }
 
+    public function getPostsForProfile($id_user) {
+        return $this->db
+                    ->from('post')
+                    ->where('id_user', $id_user)
+                    ->order_by('id_post DESC')
+                    ->get()
+                    ->result();
+    }
+
     public function addPost($image_name, $id_user) {
         $data = array(
             'image_name' => $image_name,

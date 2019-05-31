@@ -15,7 +15,7 @@
         <a class="nav-link" href="<?php echo site_url("User/addPost")?>">Add post</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo site_url("User/profile")?>">Profile</a>
+        <a class="nav-link" href="<?php echo site_url("User/profile/".$this->session->userdata['user']->id_user)?>">Profile</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<?php echo site_url("User/logOut")?>">Log Out</a>

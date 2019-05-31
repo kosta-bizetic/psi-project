@@ -16,6 +16,11 @@
             echo $num_posts." posts<br>";
             echo $num_followers." followers<br>";
             echo $num_following." following<br>";
+
+            foreach ($posts as $post) {
+                $this->load->view('user/partial/singlePost', ['image_name' => $post->image_name]);
+            }
         ?>
+
     </body>
 </html>

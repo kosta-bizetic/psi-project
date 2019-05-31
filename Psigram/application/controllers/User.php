@@ -32,7 +32,7 @@ class User extends CI_Controller {
     }
 
     public function index() {
-        redirect('user/feed');
+        $this->feed();
     }
 
     public function feed() {
@@ -67,11 +67,13 @@ class User extends CI_Controller {
         }
     }
 
-    public function profile() {
-        $this->data['user'] = $this->user;
-        $this->data['num_posts'] = $this->UserModel->getNumberOfPosts($this->user->id_user);
-        $this->data['num_followers'] = $this->UserModel->getNumberOfFollowers($this->user->id_user);
-        $this->data['num_following'] = $this->UserModel->getNumberOfFollowing($this->user->id_user);
+    public function profile($user_id) {
+        $profile_user = $this->UserModel->getUserById($user_id);
+        $this->data['user'] = $profile_user;
+        $this->data['num_posts'] = $this->UserModel->getNumberOfPosts($profile_user->id_user);
+        $this->data['num_followers'] = $this->UserModel->getNumberOfFollowers($profile_user->id_user);
+        $this->data['num_following'] = $this->UserModel->getNumberOfFollowing($profile_user->id_user);
+        $this->data['posts'] = $this->PostModel->getPostsForProfile($profile_user->id_user);
         $this->load->view('user/profile.php', $this->data);
     }
 

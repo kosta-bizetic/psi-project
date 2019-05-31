@@ -10,8 +10,7 @@
     <body>
         <?php
             $this->load->view('user/partial/header.php', $this->data);
-        ?>
-        <?php
+
             foreach ($posts as $post) {
                 $this->load->view('user/partial/singlePost', ['image_name' => $post->image_name]);
             }
