@@ -36,7 +36,9 @@ class User extends CI_Controller {
     }
 
     public function feed() {
-        $this->data['posts'] = $this->PostModel->getAllPosts();
+        $followed_users = $this->UserModel->getFollowing($this->user->id_user);
+        $this->data['posts'] =
+                $this->PostModel->getPostsForFeed($this->user->id_user, $followed_users);
 
         $this->load->view('user/feed.php', $this->data);
     }

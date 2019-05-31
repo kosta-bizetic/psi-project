@@ -22,6 +22,21 @@ class PostModel extends CI_Model {
         return $this->db->get('post')->result();
     }
 
+    public function getPostsForFeed($id_user, $followed_users) {
+        if ($followed_users == null) {
+            $followed_users = '';
+        }
+
+        return $this->db
+                    ->from('post')
+                    ->where('id_user', $id_user)
+                    ->or_where('sponsored', 1)
+                    ->or_where_in('id_user', $followed_users)
+                    ->order_by('id_post DESC')
+                    ->get()
+                    ->result();
+    }
+
     public function addPost($image_name, $id_user) {
         $data = array(
             'image_name' => $image_name,

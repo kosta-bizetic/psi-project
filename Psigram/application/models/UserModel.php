@@ -55,9 +55,10 @@ class UserModel extends CI_Model {
 
     public function getFollowers($user_id) {
         return $this->db
-                    ->select('id_user')
+                    ->select('id_user_following')
                     ->from("Follows")
                     ->where("id_user_followed", $user_id)
+                    ->get()
                     ->result();
     }
 
@@ -70,9 +71,10 @@ class UserModel extends CI_Model {
 
     public function getFollowing($user_id) {
         return $this->db
-                    ->select('id_user')
+                    ->select('id_user_followed')
                     ->from("Follows")
                     ->where("id_user_following", $user_id)
+                    ->get()
                     ->result();
     }
 
