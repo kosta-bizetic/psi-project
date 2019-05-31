@@ -12,21 +12,15 @@
  * @author LukaDojcilovic
  */
 class UserModel extends CI_Model {
-    public $user;
-
     public function __construct() {
         parent::__construct();
     }
 
     public function getUser($username) {
-        $this->user = $this->db->where('username', $username)
-                               ->get('user')->row();
-
-        return $this->user != NULL;
-    }
-
-    public function checkPassword($password) {
-        return $this->user->password == $password;
+        return $this->db
+                    ->where('username', $username)
+                    ->get('user')
+                    ->row();
     }
 
     public function usernameExists($username) {

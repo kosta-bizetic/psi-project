@@ -45,16 +45,14 @@ class Guest extends CI_Controller {
         if ($this->form_validation->run() == FALSE){
             $this->index();
         } else {
-            if($this->UserModel->
-                    getUser($this->input->post('username'))){
+            $user = $this->UserModel->getUser($this->input->post('username'));
 
-                if($this->UserModel->
-                        checkPassword($this->input->post('password'))){
-
+            if($user != null){
+                if ($user->password == $this->input->post('password')){
                     $this->session->set_userdata
-                            ('user',$this->UserModel->user);
+                            ('user', $user);
 
-                    $this->redirectToType($this->UserModel->user->type);
+                    $this->redirectToType($user->type);
                 } else {
                     $this->login('Incorrect password.<br/>');
                 }
@@ -95,12 +93,13 @@ class Guest extends CI_Controller {
             $this->registration($message);
         } else {
             $this->UserModel->addUser($data);
+            $user = $this->UserModel->getUser($data['username']);
 
-            if ($this->UserModel->getUser($data['username'])) {
+            if ($user != null) {
                 $this->session->set_userdata
-                            ('user',$this->UserModel->user);
+                            ('user', $user);
 
-                $this->redirectToType($this->UserModel->user->type);
+                $this->redirectToType($user->type);
             } else {
                 $this->registration("There was an error. Please try again.");
             }
