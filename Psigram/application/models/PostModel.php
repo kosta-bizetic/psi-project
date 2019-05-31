@@ -24,14 +24,14 @@ class PostModel extends CI_Model {
 
     public function getPostsForFeed($id_user, $followed_users) {
         if ($followed_users == null) {
-            $followed_users = '';
+            $followed_users = [''];
         }
 
         return $this->db
                     ->from('post')
                     ->where('id_user', $id_user)
                     ->or_where('sponsored', 1)
-                    ->or_where_in('id_user', $followed_users)
+                    ->or_where_in('id_user', array_values($followed_users))
                     ->order_by('id_post DESC')
                     ->get()
                     ->result();
