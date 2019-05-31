@@ -10,13 +10,31 @@
     <body>
         <?php
             $this->load->view('user/partial/header.php', $this->data);
-            echo "<br>";
-            echo $user->name." ".$user->surname."<br>";
-            echo "@".$user->username."<br>";
-            echo $num_posts." posts<br>";
-            echo $num_followers." followers<br>";
-            echo $num_following." following<br>";
+        ?>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <?php
+                    echo '<table class="table col-md-8">
+                            <tbody>
+                              <tr class="table-primary">
+                                <th scope="row" align="right">@'.$user->username.'</th>
+                                <td>'.$user->name.' '.$user->surname.'</td>';
 
+
+                    for ($i = 0; $i < 20; $i++) {
+                        echo '<td></td>';
+                    }
+
+                    echo       '<td align="center">'.$num_posts.'<br>Posts</td>
+                                <td align="center">'.$num_followers.'<br>Followers</td>
+                                <td align="center">'.$num_following.'<br>Follwoing</td>
+                              </tr>
+                            </tbody>
+                          </table>';
+                ?>
+            </div>
+        </div>
+        <?php
             foreach ($posts as $post) {
                 $this->load->view('user/partial/singlePost', ['image_name' => $post->image_name]);
             }
