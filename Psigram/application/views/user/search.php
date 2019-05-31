@@ -17,7 +17,6 @@ and open the template in the editor.
             }
             table {
               table-layout: fixed ;
-              border-right:aqua;
               width: 100% ;
             }
         </style>
