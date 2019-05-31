@@ -95,7 +95,7 @@ class User extends CI_Controller {
     public function search() {
         $this->data['users'] = $this->MUser->getAllUsers();
 
-        $this->view->load('user/search', $this->data);
+        $this->load->view('user/search.php', $this->data);
     }
 
 }
