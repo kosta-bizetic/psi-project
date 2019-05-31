@@ -77,6 +77,16 @@ class User extends CI_Controller {
         $this->load->view('user/profile.php', $this->data);
     }
 
+    public function followHandler($id_user_followed) {
+        $this->MFollows->createFollows($this->user->id_user, $id_user_followed);
+        redirect('User/profile/'.$id_user_followed);
+    }
+
+    public function unfollowHandler($id_user_followed) {
+        $this->MFollows->deleteFollows($this->user->id_user, $id_user_followed);
+        redirect('User/profile/'.$id_user_followed);
+    }
+
     public function logOut() {
         $this->session->unset_userdata('user');
         redirect();

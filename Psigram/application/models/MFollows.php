@@ -52,4 +52,19 @@ class MFollows extends CI_Model{
                         ->where("id_user_following", $user_id)
                         ->count_all_results();
     }
+
+    public function createFollows($id_user_following, $id_user_followed) {
+        $data = array(
+            'id_user_following' => $id_user_following,
+            'id_user_followed' => $id_user_followed
+        );
+
+        $this->db->insert('follows', $data);
+    }
+
+    public function deleteFollows($id_user_following, $id_user_followed) {
+        $this->db->where('id_user_following', $id_user_following)
+                 ->where('id_user_followed', $id_user_followed)
+                 ->delete('follows');
+    }
 }
