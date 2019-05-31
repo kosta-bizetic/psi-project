@@ -70,6 +70,7 @@ class User extends CI_Controller {
     public function profile($user_id) {
         $profile_user = $this->UserModel->getUserById($user_id);
         $this->data['user'] = $profile_user;
+        $this->data['follows'] = $this->UserModel->getFollows($this->user->id_user, $profile_user->id_user);
         $this->data['num_posts'] = $this->UserModel->getNumberOfPosts($profile_user->id_user);
         $this->data['num_followers'] = $this->UserModel->getNumberOfFollowers($profile_user->id_user);
         $this->data['num_following'] = $this->UserModel->getNumberOfFollowing($profile_user->id_user);
