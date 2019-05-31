@@ -79,15 +79,6 @@ class UserModel extends CI_Model {
                     ->count_all_results();
     }
 
-    public function getFollowing($user_id) {
-        return $this->db
-                    ->select('id_user_followed')
-                    ->from("Follows")
-                    ->where("id_user_following", $user_id)
-                    ->get()
-                    ->result();
-    }
-
     public function getNumberOfFollowing($user_id) {
         return $this->db
                     ->from("Follows")

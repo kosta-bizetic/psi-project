@@ -25,6 +25,7 @@ class User extends CI_Controller {
 
         $this->load->model("PostModel");
         $this->load->model('UserModel');
+        $this->load->model('MFollows');
 
         $this->data['title'] = 'Psigram';
 
@@ -36,9 +37,7 @@ class User extends CI_Controller {
     }
 
     public function feed() {
-        $followed_users = $this->UserModel->getFollowing($this->user->id_user);
-        $this->data['posts'] =
-                $this->PostModel->getPostsForFeed($this->user->id_user, $followed_users);
+        $this->data['posts'] = $this->PostModel->getPostsForFeed($this->user);
 
         $this->load->view('user/feed.php', $this->data);
     }

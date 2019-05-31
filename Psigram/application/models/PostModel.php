@@ -15,6 +15,8 @@ class PostModel extends CI_Model {
 
     public function __construct() {
         parent::__construct();
+
+        $this->load->model("MFollows");
     }
 
     public function getAllPosts() {
@@ -22,24 +24,18 @@ class PostModel extends CI_Model {
         return $this->db->get('post')->result();
     }
 
-    public function getPostsForFeed($id_user, $followed_users) {
-        $followed_users_ids = [];
-        if ($followed_users == null) {
-            array_push($followed_users_ids, '');
-        }else {
-            foreach ($followed_users as $followed_user) {
-                array_push($followed_users_ids, $followed_user->id_user_followed);
-            }
-        }
+    public function getPostsForFeed($user) {
+        $all_users_ids = $this->MFollows->getFollowedUserIds($user->id_user);
+        array_push($all_users_ids, $user->id_user);
 
-        return $this->db
-                    ->from('post')
-                    ->where('id_user', $id_user)
-                    ->or_where('sponsored', 1)
-                    ->or_where_in('id_user', $followed_users_ids)
-                    ->order_by('id_post DESC')
-                    ->get()
-                    ->result();
+        $this->db->from('post')
+                 ->where_in('id_user', $all_users_ids);
+        if ($user->type == 'u') {
+            $this->db->or_where('sponsored', 1);
+        }
+        $this->db->order_by('timestamp DESC');
+
+        return $this->db->get()->result();
     }
 
     public function getPostsForProfile($id_user) {
