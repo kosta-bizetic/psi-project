@@ -8,7 +8,7 @@
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="<?php echo site_url("User/feed")?>">Feed<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
