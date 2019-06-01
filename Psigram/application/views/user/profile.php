@@ -28,9 +28,9 @@
 
                     if ($user->id_user != $this->session->userdata['user']->id_user) {
                         if (!$follows) {
-                            echo '<td><a href="'. site_url("User/followHandler/".$user->id_user).'"><button type="button" class="btn btn-success">Follow</button></a></td>';
+                            echo '<td><a href="'. site_url("$this->class_name/followHandler/".$user->id_user).'"><button type="button" class="btn btn-success">Follow</button></a></td>';
                         } else {
-                            echo '<td><a href="'. site_url("User/unfollowHandler/".$user->id_user).'"><button type="button" class="btn btn-danger">Unfollow</button></a></td>';
+                            echo '<td><a href="'. site_url("$this->class_name/unfollowHandler/".$user->id_user).'"><button type="button" class="btn btn-danger">Unfollow</button></a></td>';
                         }
                     }
 

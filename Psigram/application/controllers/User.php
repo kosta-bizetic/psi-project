@@ -19,8 +19,7 @@ class User extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        if (! ($this->session->has_userdata('user')) ||
-                ! ($this->session->userdata['user']->type == 'u')) {
+        if (! ($this->session->has_userdata('user'))) {
             redirect();
         }
 
@@ -34,7 +33,7 @@ class User extends CI_Controller {
     }
 
     public function index() {
-        $this->feed();
+        redirect("$this->class_name/feed");
     }
 
     public function feed() {

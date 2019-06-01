@@ -14,7 +14,7 @@
 class Guest extends CI_Controller {
 
     var $data = array();
-
+    var $class_name;
     public function __construct() {
         parent::__construct();
         if ($this->session->has_userdata('user')) {
@@ -24,10 +24,11 @@ class Guest extends CI_Controller {
         $this->load->model('MUser');
 
         $this->data['title'] = 'Psigram';
+        $this->class_name = get_class($this);
     }
 
     public function index() {
-        $this->login();
+        redirect("$this->class_name/login");
     }
 
     public function login($message=null) {
@@ -109,13 +110,13 @@ class Guest extends CI_Controller {
     private function redirectToType($type) {
         switch ($type) {
             case 'a':
-                Redirect("Admin");
+                Redirect('Admin');
                 break;
             case 'b':
-                Redirect("Business");
+                Redirect('Business');
                 break;
-            case 'u':
-                Redirect("User");
+            case 's':
+                Redirect('Standard');
                 break;
         }
     }
