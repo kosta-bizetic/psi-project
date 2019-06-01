@@ -1,20 +1,14 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+require_once APPPATH.'\\core\\PSIController.php';
 
 /**
- * Description of GuestController
+ * Description of Guest
  *
  * @author LukaDojcilovic
  */
-class Guest extends CI_Controller {
+class Guest extends PSIController {
 
-    var $data = array();
-    var $class_name;
     public function __construct() {
         parent::__construct();
         if ($this->session->has_userdata('user')) {
@@ -31,7 +25,8 @@ class Guest extends CI_Controller {
         redirect("$this->class_name/login");
     }
 
-    public function login($message=null) {
+    public function logIn($message=null) {
+        $this->preparePosttitle(__FUNCTION__);
         $this->data['message'] = $message;
 
         $this->load->view('guest/login', $this->data);
@@ -64,6 +59,7 @@ class Guest extends CI_Controller {
     }
 
     public function registration($message=null) {
+        $this->preparePosttitle(__FUNCTION__);
         $this->data['message'] = $message;
 
         $this->load->view("guest/registration", $this->data);

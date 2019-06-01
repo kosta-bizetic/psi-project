@@ -1,9 +1,9 @@
 <?php
 
-require_once 'User.php';
+require_once APPPATH.'\\core\\User.php';
 
 /**
- * Description of Basic
+ * Description of Standard
  *
  * @author Kosta
  */
