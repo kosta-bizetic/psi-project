@@ -12,7 +12,7 @@
             $this->load->view('user/partial/header.php', $this->data);
 
             foreach ($posts as $post) {
-                $this->load->view('user/partial/singlePost', ['post' => $post]);
+                $this->load->view('user/partial/singlePost', ['post' => $post, 'redirectPage' => 'feed']);
             }
         ?>
     </body>

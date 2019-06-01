@@ -49,7 +49,7 @@
         </div>
         <?php
             foreach ($posts as $post) {
-                $this->load->view('user/partial/singlePost', ['post' => $post]);
+                $this->load->view('user/partial/singlePost', ['post' => $post, 'redirectPage' => "profile/".$post->id_user]);
             }
         ?>
 

@@ -88,13 +88,17 @@ class User extends PSIController {
         redirect("$this->class_name/profile/".$id_user_followed);
     }
 
-    public function likeHandler($id_post, $likes) {
+    public function likeHandler($id_post, $likes, $redirectPage, $user=null) {
         if (!$likes) {
             $this->MLikes->addLikes($this->user->id_user, $id_post);
         } else {
             $this->MLikes->removeLikes($this->user->id_user, $id_post);
         }
-        redirect("$this->class_name/feed");
+        $redirectString = "$this->class_name/$redirectPage";
+        if ($user != null) {
+            $redirectString .= "/$user";
+        }
+        redirect($redirectString);
     }
 
     public function logOut() {
