@@ -38,7 +38,6 @@ class User extends CI_Controller {
 
     public function feed() {
         $this->data['posts'] = $this->MPost->getPostsForFeed($this->user);
-
         $this->load->view('user/feed.php', $this->data);
     }
 

@@ -12,7 +12,7 @@ class Business extends User {
         parent::__construct();
 
         if (! ($this->session->has_userdata('user'))
-            || ! ($this->session->userdata['user']->type != 'b')) {
+            || $this->session->userdata['user']->type != 'b') {
             redirect();
         }
 

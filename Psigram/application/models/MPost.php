@@ -24,29 +24,34 @@ class MPost extends CI_Model {
         return $this->db->get('post')->result();
     }
 
+    private function prepareToGetPostByUserIds($user_ids) {
+        $user = $this->session->userdata['user'];
+
+        $this->db   ->select('*, Post.id_post, Post.id_user, CASE WHEN Likes.id_user IS NULL THEN 0 ELSE 1 END AS likes', false)
+                    ->from('Post')
+                    ->join('User', 'User.id_user = Post.id_user')
+                    ->join('Likes', "Likes.id_post = Post.id_post AND Likes.id_user = $user->id_user", "left")
+                    ->where_in('Post.id_user', $user_ids)
+                    ->order_by('Post.timestamp DESC');
+    }
+
     public function getPostsForFeed($user) {
         $all_users_ids = $this->MFollows->getFollowedUserIds($user->id_user);
         array_push($all_users_ids, $user->id_user);
 
-        $this->db   ->from('post')
-                    ->join('user', 'user.id_user = post.id_user')
-                    ->where_in('user.id_user', $all_users_ids);
-        if ($user->type == 'u') {
-            $this->db->or_where('post.sponsored', 1);
+        $this->prepareToGetPostByUserIds($all_users_ids);
+
+        if ($user->type == 's') {
+            $this->db->or_where('Post.sponsored', 1);
         }
-        $this->db->order_by('post.timestamp DESC');
 
         return $this->db->get()->result();
     }
 
     public function getPostsForProfile($id_user) {
-        return $this->db
-                    ->from('post')
-                    ->join('user', 'user.id_user = post.id_user')
-                    ->where('post.id_user', $id_user)
-                    ->order_by('post.timestamp DESC')
-                    ->get()
-                    ->result();
+        $this->prepareToGetPostByUserIds($id_user);
+
+        return $this->db->get()->result();
     }
 
     public function getNumberOfPosts($user_id) {
@@ -61,6 +66,11 @@ class MPost extends CI_Model {
             'id_user' => $id_user
         );
         $this->db->insert('Post', $data);
+    }
+
+    public function removePost($id_post) {
+        $this->db   ->where('id_post', $id_post)
+                    ->delete('Post');
     }
 
     public function updateNumLikes($id_post, $inc) {

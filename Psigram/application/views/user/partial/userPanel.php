@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <div class="container-fluid">
     <div class="row justify-content-center">
         <table style="cursor: pointer" onclick="location.href='<?php echo site_url("$this->class_name/profile/".$user->id_user)?>'" class="table table-hover col-md-4">
