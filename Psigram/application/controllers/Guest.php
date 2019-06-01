@@ -97,9 +97,7 @@ class Guest extends CI_Controller {
             $user = $this->MUser->getUserByUsername($data['username']);
 
             if ($user != null) {
-                $this->session->set_userdata
-                            ('user', $user);
-
+                $this->session->set_userdata('user', $user);
                 $this->redirectToType($user->type);
             } else {
                 $this->registration("There was an error. Please try again.");
@@ -110,13 +108,13 @@ class Guest extends CI_Controller {
     private function redirectToType($type) {
         switch ($type) {
             case 'a':
-                Redirect('Admin');
+                redirect('Admin');
                 break;
             case 'b':
-                Redirect('Business');
+                redirect('Business');
                 break;
             case 's':
-                Redirect('Standard');
+                redirect('Standard');
                 break;
         }
     }

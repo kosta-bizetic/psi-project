@@ -26,6 +26,7 @@ class User extends CI_Controller {
         $this->load->model('MPost');
         $this->load->model('MUser');
         $this->load->model('MFollows');
+        $this->load->model('MLikes');
 
         $this->data['title'] = 'Psigram';
         $this->user = $this->session->userdata['user'];
@@ -84,6 +85,15 @@ class User extends CI_Controller {
     public function unfollowHandler($id_user_followed) {
         $this->MFollows->removeFollows($this->user->id_user, $id_user_followed);
         redirect("$this->class_name/profile/".$id_user_followed);
+    }
+
+    public function likeHandler($id_post, $likes) {
+        if (!$likes) {
+            $this->MLikes->addLikes($this->user->id_user, $id_post);
+        } else {
+            $this->MLikes->removeLikes($this->user->id_user, $id_post);
+        }
+        redirect("$this->class_name/feed");
     }
 
     public function logOut() {

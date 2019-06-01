@@ -76,8 +76,8 @@ and open the template in the editor.
                           <label for="type">User type</label>
                           <div class="form-check">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="type" value="u" checked required>
-                              Basic
+                              <input type="radio" class="form-check-input" name="type" value="s" checked required>
+                              Standard
                             </label>
                           </div>
                           <div class="form-check">

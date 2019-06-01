@@ -39,7 +39,7 @@ class MLikes extends CI_Model {
     public function removeLikes($id_user, $id_post) {
         $this->db   ->from('Likes')
                     ->where('id_user', $id_user)
-                    ->and_where('id_post', $id_post)
+                    ->where('id_post', $id_post)
                     ->delete();
 
         $this->MPost->updateNumLikes($id_post, -1);

@@ -1,13 +1,17 @@
 
 <div class="container-fluid" style="padding: 1%">
     <div class="row justify-content-center">
-        <strong>@<?php echo $post->username ?></strong>
-        <br>
         <div class="col-md-4">
-            <img src="<?php echo base_url('/uploads/'.$post->image_name) ?>" class="img-fluid">
+            <strong>@<?php echo $post->username ?></strong>
+            <br/>
+            <img ondblclick="location.href='<?php echo site_url("$this->class_name/likeHandler/".$post->id_post."/".$post->likes)?>'" src="<?php echo base_url('/uploads/'.$post->image_name) ?>" class="img-fluid">
+            <br/>
+            <strong>
+                <?php echo $post->num_likes ?> Likes
+                <?php if ($post->likes) {
+                    echo '<br/>You liked this.';
+                } ?>
+            </strong>
         </div>
-        <br>
-        <strong><?php echo $post->num_likes ?> Likes</strong>
-        <br>
     </div>
 </div>
