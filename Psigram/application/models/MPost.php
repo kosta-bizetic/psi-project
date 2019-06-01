@@ -42,8 +42,9 @@ class MPost extends CI_Model {
     public function getPostsForProfile($id_user) {
         return $this->db
                     ->from('post')
-                    ->where('id_user', $id_user)
-                    ->order_by('id_post DESC')
+                    ->join('user', 'user.id_user = post.id_user')
+                    ->where('post.id_user', $id_user)
+                    ->order_by('post.timestamp DESC')
                     ->get()
                     ->result();
     }
