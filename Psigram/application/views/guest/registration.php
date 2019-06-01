@@ -9,9 +9,17 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <style>
+            label {
+                color: white;
+            }
+            .email-sharing {
+                color: white;
+            }
+        </style>
         <title><?php echo $title ?></title>
     </head>
-    <body style='background-color: lightblue'>
+    <body style='background-image: url("<?php echo base_url('/assets/backgroundImage.jpg') ?>")'>
         <?php
             $this->load->view('guest/partial/header.php');
         ?>
@@ -43,7 +51,7 @@ and open the template in the editor.
                         <div class="form-group">
                           <label for="email">Email address</label>
                           <input type="email" class="form-control" name="email" placeholder="Email address" required>
-                          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                          <small id="emailHelp" class="email-sharing form-text">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
                           <label for="date_of_brith">Date of birth</label>
