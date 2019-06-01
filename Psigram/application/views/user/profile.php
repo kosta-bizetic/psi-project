@@ -11,7 +11,7 @@
                 vertical-align:middle;
             }
         </style>
-        <title><?php echo $title ?></title>
+        <title><?php echo $title.' - '.$posttitle ?></title>
     </head>
     <body>
         <?php

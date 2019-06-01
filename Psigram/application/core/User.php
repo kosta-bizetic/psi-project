@@ -1,21 +1,15 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+require_once 'PSIController.php';
 
 /**
- * Description of KorisnikController
+ * Description of User
  *
  * @author Kosta
  */
-class User extends CI_Controller {
+class User extends PSIController {
 
-    var $data = array();
     var $user;
-    var $class_name;
 
     public function __construct() {
         parent::__construct();
@@ -38,11 +32,16 @@ class User extends CI_Controller {
     }
 
     public function feed() {
+        $this->preparePosttitle(__FUNCTION__);
         $this->data['posts'] = $this->MPost->getPostsForFeed($this->user);
+
+
         $this->load->view('user/feed.php', $this->data);
     }
 
     public function addPost() {
+        $this->preparePosttitle(__FUNCTION__);
+
         $this->load->view('user/addPost.php', $this->data);
     }
 
@@ -67,6 +66,8 @@ class User extends CI_Controller {
     }
 
     public function profile($user_id) {
+        $this->preparePosttitle(__FUNCTION__);
+
         $profile_user = $this->MUser->getUserById($user_id);
         $this->data['user'] = $profile_user;
         $this->data['follows'] = $this->MFollows->getFollows($this->user->id_user, $profile_user->id_user);
@@ -102,9 +103,9 @@ class User extends CI_Controller {
     }
 
     public function search() {
+        $this->preparePosttitle(__FUNCTION__);
         $this->data['users'] = $this->MUser->getAllUsers();
 
         $this->load->view('user/search.php', $this->data);
     }
-
 }

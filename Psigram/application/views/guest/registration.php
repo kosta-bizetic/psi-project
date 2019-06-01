@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -17,7 +13,7 @@ and open the template in the editor.
                 color: white;
             }
         </style>
-        <title><?php echo $title ?></title>
+        <title><?php echo $title.' - '.$posttitle ?></title>
     </head>
     <body style='background-image: url("<?php echo base_url('/assets/backgroundImage.jpg') ?>")'>
         <?php

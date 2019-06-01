@@ -72,11 +72,4 @@ class MPost extends CI_Model {
         $this->db   ->where('id_post', $id_post)
                     ->delete('Post');
     }
-
-    public function updateNumLikes($id_post, $inc) {
-        $this->db   ->from("Post")
-                    ->where('id_post', $id_post)
-                    ->set('num_likes', "num_likes+($inc)", false)
-                    ->update();
-    }
 }

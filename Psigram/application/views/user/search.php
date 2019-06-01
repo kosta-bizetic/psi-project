@@ -20,7 +20,7 @@ and open the template in the editor.
               width: 100% ;
             }
         </style>
-        <title><?php echo $title ?></title>
+        <title><?php echo $title.' - '.$posttitle ?></title>
     </head>
     <body>
         <?php

@@ -14,8 +14,6 @@
 class MLikes extends CI_Model {
     public function __construct() {
         parent::__construct();
-
-        $this->load->model("MPost");
     }
 
     public function getLikesExist($id_user, $id_post) {
@@ -32,8 +30,6 @@ class MLikes extends CI_Model {
             'id_post' => $id_post
         );
         $this->db->insert('Likes', $data);
-
-        $this->MPost->updateNumLikes($id_post, 1);
     }
 
     public function removeLikes($id_user, $id_post) {
@@ -41,7 +37,5 @@ class MLikes extends CI_Model {
                     ->where('id_user', $id_user)
                     ->where('id_post', $id_post)
                     ->delete();
-
-        $this->MPost->updateNumLikes($id_post, -1);
     }
 }
