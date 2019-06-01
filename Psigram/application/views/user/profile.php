@@ -40,7 +40,7 @@
 
                     echo       '<td>'.$num_posts.'<br>Posts</td>
                                 <td>'.$num_followers.'<br>Followers</td>
-                                <td>'.$num_following.'<br>Follwoing</td>
+                                <td>'.$num_following.'<br>Following</td>
                               </tr>
                             </tbody>
                           </table>';

@@ -17,11 +17,12 @@ class MFollows extends CI_Model{
     }
 
     public function getFollowedUserIds($id_user) {
-        return $this->db->from("Follows")
+        $followed_user_ids = $this->db->from("Follows")
                         ->select('id_user_followed')
                         ->where("id_user_following", $id_user)
                         ->get()
-                        ->result();
+                        ->result_array();
+        return array_column($followed_user_ids, 'id_user_followed');
     }
 
     public function getFollows($id_user_following, $id_user_followed) {
