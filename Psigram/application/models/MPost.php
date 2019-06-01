@@ -25,11 +25,7 @@ class MPost extends CI_Model {
     }
 
     public function getPostsForFeed($user) {
-        $all_users_ids = [];
-        $users_followed = $this->MFollows->getFollowedUserIds($user->id_user);
-        foreach ($users_followed as $user_followed) {
-            array_push($all_users_ids, $user_followed->id_user_followed);
-        }
+        $all_users_ids = $this->MFollows->getFollowedUserIds($user->id_user);
         array_push($all_users_ids, $user->id_user);
 
         $this->db->from('post')
