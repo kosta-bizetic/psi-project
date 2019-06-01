@@ -49,7 +49,7 @@
         </div>
         <?php
             foreach ($posts as $post) {
-                $this->load->view('user/partial/singlePost', ['image_name' => $post->image_name]);
+                $this->load->view('user/partial/singlePost', ['post' => $post]);
             }
         ?>
 
