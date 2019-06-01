@@ -7,10 +7,21 @@
             <img ondblclick="location.href='<?php echo site_url("$this->class_name/likeHandler/".$post->id_post."/".$post->likes."/".$redirectPage)?>'" src="<?php echo base_url('/uploads/'.$post->image_name) ?>" class="img-fluid">
             <br/>
             <strong>
-                <?php echo $post->num_likes ?> Likes
-                <?php if ($post->likes) {
-                    echo '<br/>You liked this.';
-                } ?>
+                <?php
+                    if ($post->likes) {
+                        if ($post->num_likes == 2) {
+                            echo 'You and '.($post->num_likes - 1).' other liked this.';
+                        } else {
+                            echo 'You and '.($post->num_likes - 1).' others liked this.';
+                        }
+                    } else {
+                        if ($post->num_likes == 1) {
+                            echo $post->num_likes.' person likes this.';
+                        } else {
+                            echo $post->num_likes.' people like this.';
+                        }
+                    }
+                ?>
             </strong>
         </div>
     </div>
