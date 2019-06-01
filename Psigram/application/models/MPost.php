@@ -28,12 +28,13 @@ class MPost extends CI_Model {
         $all_users_ids = $this->MFollows->getFollowedUserIds($user->id_user);
         array_push($all_users_ids, $user->id_user);
 
-        $this->db->from('post')
-                 ->where_in('id_user', $all_users_ids);
+        $this->db   ->from('post')
+                    ->join('user', 'user.id_user = post.id_user')
+                    ->where_in('user.id_user', $all_users_ids);
         if ($user->type == 'u') {
-            $this->db->or_where('sponsored', 1);
+            $this->db->or_where('post.sponsored', 1);
         }
-        $this->db->order_by('timestamp DESC');
+        $this->db->order_by('post.timestamp DESC');
 
         return $this->db->get()->result();
     }

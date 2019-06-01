@@ -17,11 +17,11 @@ class MFollows extends CI_Model{
     }
 
     public function getFollowedUserIds($id_user) {
-        $followed_user_ids = $this->db->from("Follows")
-                        ->select('id_user_followed')
-                        ->where("id_user_following", $id_user)
-                        ->get()
-                        ->result_array();
+        $followed_user_ids = $this->db  ->from("Follows")
+                                        ->select('id_user_followed')
+                                        ->where("id_user_following", $id_user)
+                                        ->get()
+                                        ->result_array();
         return array_column($followed_user_ids, 'id_user_followed');
     }
 
@@ -60,12 +60,12 @@ class MFollows extends CI_Model{
             'id_user_followed' => $id_user_followed
         );
 
-        $this->db->insert('follows', $data);
+        $this->db->insert('Follows', $data);
     }
 
     public function deleteFollows($id_user_following, $id_user_followed) {
         $this->db->where('id_user_following', $id_user_following)
                  ->where('id_user_followed', $id_user_followed)
-                 ->delete('follows');
+                 ->delete('Follows');
     }
 }

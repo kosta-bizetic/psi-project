@@ -15,6 +15,7 @@ class User extends CI_Controller {
 
     var $data = array();
     var $user;
+    var $class_name;
 
     public function __construct() {
         parent::__construct();
@@ -28,8 +29,8 @@ class User extends CI_Controller {
         $this->load->model('MFollows');
 
         $this->data['title'] = 'Psigram';
-
         $this->user = $this->session->userdata['user'];
+        $this->class_name = get_class($this);
     }
 
     public function index() {
@@ -62,7 +63,7 @@ class User extends CI_Controller {
         } else {
             $this->MPost->addPost($config['file_name'].$this->upload->data('file_ext'), $this->user->id_user );
 
-            redirect("User/feed");
+            redirect("$this->class_name/feed");
         }
     }
 
@@ -79,12 +80,12 @@ class User extends CI_Controller {
 
     public function followHandler($id_user_followed) {
         $this->MFollows->createFollows($this->user->id_user, $id_user_followed);
-        redirect('User/profile/'.$id_user_followed);
+        redirect("$this->class_name/profile/".$id_user_followed);
     }
 
     public function unfollowHandler($id_user_followed) {
         $this->MFollows->deleteFollows($this->user->id_user, $id_user_followed);
-        redirect('User/profile/'.$id_user_followed);
+        redirect("$this->class_name/profile/".$id_user_followed);
     }
 
     public function logOut() {
