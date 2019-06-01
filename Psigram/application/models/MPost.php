@@ -59,6 +59,13 @@ class MPost extends CI_Model {
             'image_name' => $image_name,
             'id_user' => $id_user
         );
-        $this->db->insert('post', $data);
+        $this->db->insert('Post', $data);
+    }
+
+    public function updateNumLikes($id_post, $inc) {
+        $this->db   ->from("Post")
+                    ->where('id_post', $id_post)
+                    ->set('num_likes', "num_likes+($inc)")
+                    ->update();
     }
 }

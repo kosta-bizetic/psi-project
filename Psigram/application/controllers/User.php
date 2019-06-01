@@ -79,12 +79,12 @@ class User extends CI_Controller {
     }
 
     public function followHandler($id_user_followed) {
-        $this->MFollows->createFollows($this->user->id_user, $id_user_followed);
+        $this->MFollows->addFollows($this->user->id_user, $id_user_followed);
         redirect("$this->class_name/profile/".$id_user_followed);
     }
 
     public function unfollowHandler($id_user_followed) {
-        $this->MFollows->deleteFollows($this->user->id_user, $id_user_followed);
+        $this->MFollows->removeFollows($this->user->id_user, $id_user_followed);
         redirect("$this->class_name/profile/".$id_user_followed);
     }
 

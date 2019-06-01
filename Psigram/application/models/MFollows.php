@@ -54,7 +54,7 @@ class MFollows extends CI_Model{
                         ->count_all_results();
     }
 
-    public function createFollows($id_user_following, $id_user_followed) {
+    public function addFollows($id_user_following, $id_user_followed) {
         $data = array(
             'id_user_following' => $id_user_following,
             'id_user_followed' => $id_user_followed
@@ -63,7 +63,7 @@ class MFollows extends CI_Model{
         $this->db->insert('Follows', $data);
     }
 
-    public function deleteFollows($id_user_following, $id_user_followed) {
+    public function removeFollows($id_user_following, $id_user_followed) {
         $this->db->where('id_user_following', $id_user_following)
                  ->where('id_user_followed', $id_user_followed)
                  ->delete('Follows');
