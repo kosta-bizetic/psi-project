@@ -110,6 +110,20 @@ class User extends PSIController {
         $this->preparePosttitle(__FUNCTION__);
         $this->data['users'] = $this->MUser->getAllUsers();
 
-        $this->load->view('user/search.php', $this->data);
+        $this->load->view('user/userList.php', $this->data);
+    }
+
+    public function followers($user_id) {
+        $this->preparePosttitle(__FUNCTION__);
+        $this->data['users'] = $this->MUser->getFollowers($user_id);
+
+        $this->load->view('user/userList.php', $this->data);
+    }
+
+    public function following($user_id) {
+        $this->preparePosttitle(__FUNCTION__);
+        $this->data['users'] = $this->MUser->getFollowing($user_id);
+
+        $this->load->view('user/userList.php', $this->data);
     }
 }

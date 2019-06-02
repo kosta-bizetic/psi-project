@@ -7,7 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <?php $this->load->view('partial/head.php', $this->data); ?>
-        
+
         <style>
             td {
                 text-align:center;
@@ -25,7 +25,7 @@ and open the template in the editor.
             $this->load->view('user/partial/header.php', $this->data);
 
             foreach ($users as $user) {
-                $this->load->view('user/partial/userPanel.php', ['user' => $user]);
+                $this->load->view('user/partial/singleUser.php', ['user' => $user]);
             }
         ?>
     </body>
