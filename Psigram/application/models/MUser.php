@@ -36,6 +36,12 @@ class MUser extends CI_Model {
                         ->result();
     }
 
+    public function searchUsers($search_text) {
+        return $this->db->from('User')
+                        ->get()
+                        ->result();
+    }
+
     public function getFollowers($user_id) {
         return $this->db->from('Follows')
                         ->join('User', 'User.id_user = Follows.id_user_following')
