@@ -1,2 +1,5 @@
 ## MySQL Workbench
 *.mwb.bak
+
+## StarUML
+*.~ml
