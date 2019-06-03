@@ -34,18 +34,6 @@ class MFollows extends CI_Model{
                     ->result() != NULL;
     }
 
-    public function getNumberOfFollowers($user_id) {
-        return $this->db->from("Follows")
-                        ->where("id_user_followed", $user_id)
-                        ->count_all_results();
-    }
-
-    public function getNumberOfFollowing($user_id) {
-        return $this->db->from("Follows")
-                        ->where("id_user_following", $user_id)
-                        ->count_all_results();
-    }
-
     public function addFollows($id_user_following, $id_user_followed) {
         $data = array(
             'id_user_following' => $id_user_following,
