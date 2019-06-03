@@ -32,7 +32,7 @@
             </a>
             <?php
                 if ($show_comments_link) {
-                    echo '<a style="float: right" href="'.site_url("$this->class_name/post/$post->id_post").'">View comments</a>';
+                    echo '<a style="float: right" href="'.site_url("$this->class_name/post/$post->id_post").'"><strong>View comments</strong></a>';
                 }
             ?>
         </div>
