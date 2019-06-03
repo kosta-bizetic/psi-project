@@ -18,12 +18,20 @@ and open the template in the editor.
         <div class='container-fluid'>
             <div class='row justify-content-center'>
                 <div class="col-md-4">
-                    <?php
-                        foreach ($comments as $comment) {
-                            echo "<strong style='padding-right: 10px'>@$comment->username</strong>$comment->text<br/>";
-                        }
-                    ?>
-                    <form style="padding-top: 2%" method="post" action='<?php echo site_url("$this->class_name/addCommentHandler/$post->id_post") ?>'>
+                    <table class='table' style="table-layout: fixed; width: 100%">
+                        <tbody>
+                            <?php
+                                foreach ($comments as $comment) {
+                                    echo "<tr class='table-primary'>
+                                            <th scope='row'>@$comment->username</td>
+                                            <td style='word-wrap: break-word; width: 60%'>$comment->text</td>
+                                            <td style='float:right; text-align:center'>".substr($comment->timestamp, 0, 16)."</td>
+                                          </tr>";
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                    <form method="post" action='<?php echo site_url("$this->class_name/addCommentHandler/$post->id_post") ?>'>
                         <input type="text" name="comment_text" class="form-control" placeholder="Add a comment">
                     </form>
                 </div>
