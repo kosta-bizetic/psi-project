@@ -2,32 +2,22 @@
 
 <html>
     <head>
-
         <?php $this->load->view('partial/head.php', $this->data); ?>
-
-        <style>
-            label {
-                color: white;
-            }
-            .email-sharing {
-                color: white;
-            }
-        </style>
     </head>
-    <body style='background-image: url("<?php echo base_url('/assets/backgroundImage.jpg') ?>")'>
-        <?php $this->load->view('guest/partial/header.php'); ?>
+    <body>
+        <?php $this->load->view('user/partial/header.php', $this->data); ?>
         <div class="container-fluid" style="padding-top: 2%">
             <div class="row">
-                <form class="col-md-2 offset-md-4" method="post" action="<?php echo site_url("Guest/registrationHandler");?>">
+                <form class="col-md-2 offset-md-4" method="post" action="<?php echo site_url("$this->class_name/editProfileHandler");?>">
                     <?php
                         if (isset($message)) {
                             echo "<font color='red'>$message</font>";
                         }
                     ?>
-                    <fieldset>
-                        <div class="form-group">
-                          <label for="username">Username</label>
-                          <input type="text" class="form-control" name="username" placeholder="Username" required>
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-xs-"><label for="username">Username</label></div>
+                          <div class="col-xs-"><input type="text" class="form-control" id="username" name="username" placeholder="Username" required></div>
                         </div>
                         <div class="form-group">
                           <label for="exampleInputPassword1">Password</label>
@@ -80,8 +70,8 @@
                             </label>
                           </div>
                         </fieldset>
-                        <button type="submit" class="btn btn-primary">Register</button>
-                  </fieldset>
+                        <button type="submit" class="btn btn-primary">Finish</button>
+                  </div>
                 </form>
             </div>
         </div>
