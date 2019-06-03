@@ -24,6 +24,14 @@ class MLikes extends CI_Model {
                         ->row() != NULL;
     }
 
+    public function getPostLikers($id_post) {
+        return $this->db->from('Likes')
+                        ->where('id_post', $id_post)
+                        ->join('User', 'User.id_user = Likes.id_user')
+                        ->get()
+                        ->result();
+    }
+
     public function addLikes($id_user, $id_post) {
         $data = array(
             'id_user' => $id_user,

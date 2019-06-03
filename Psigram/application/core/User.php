@@ -98,12 +98,10 @@ class User extends PSIController {
             }
         }
 
-        $data = array(
-            'post' => $post,
-            'comments' => $this->MComment->getComments($id_post)
-        );
+        $this->data['post'] = $post;
+        $this->data['comments'] = $this->MComment->getComments($id_post);
 
-        $this->load->view('user/post.php', $data);
+        $this->load->view('user/post.php', $this->data);
     }
 
     public function addCommentHandler($id_post) {
@@ -122,6 +120,12 @@ class User extends PSIController {
     public function search() {
         $search_text = $this->input->post('search_text');
         $this->data['users'] = $this->MUser->searchUsers($search_text);
+
+        $this->load->view('user/userList.php', $this->data);
+    }
+
+    public function likers($post_id) {
+        $this->data['users'] = $this->MLikes->getPostLikers($post_id);
 
         $this->load->view('user/userList.php', $this->data);
     }

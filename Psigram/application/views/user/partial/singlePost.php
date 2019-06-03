@@ -11,6 +11,7 @@
             <br/>
             <img ondblclick="location.href='<?php echo site_url("$this->class_name/likeHandler/".$post->id_post."/".$post->likes)?>'" src="<?php echo base_url('/uploads/'.$post->image_name) ?>" class="img-fluid">
             <br/>
+            <a href="<?php echo site_url("$this->class_name/likers/$post->id_post") ?>">
             <strong>
                 <?php
                     if ($post->likes) {
@@ -28,6 +29,7 @@
                     }
                 ?>
             </strong>
+            </a>
             <?php
                 if ($show_comments_link) {
                     echo '<a style="float: right" href="'.site_url("$this->class_name/post/$post->id_post").'">View comments</a>';
