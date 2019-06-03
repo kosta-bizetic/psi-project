@@ -16,4 +16,6 @@ class Business extends User {
             redirect();
         }
     }
+
+
 }

@@ -88,6 +88,8 @@ class MPost extends CI_Model {
     }
 
     public function removePost($id_post) {
+        $post = $this->getPost($id_post);
+        unlink(FCPATH."uploads\\$post->image_name");
         $this->db   ->where('id_post', $id_post)
                     ->delete('Post');
     }
