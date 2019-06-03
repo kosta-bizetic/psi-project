@@ -100,6 +100,8 @@ class User extends PSIController {
     }
 
     public function post($id_post) {
+        $this->preparePosttitle(__FUNCTION__);
+
         $data = array(
             'post' => $this->MPost->getSinglePost($id_post),
             'comments' => $this->MComment->getComments($id_post)
