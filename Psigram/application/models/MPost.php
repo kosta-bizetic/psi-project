@@ -24,7 +24,7 @@ class MPost extends CI_Model {
         return $this->db->get('post')->result();
     }
 
-    private function prepareToGetPostByUserIds($user_ids) {
+    private function prepareToGetPosts($user_ids) {
         $user = $this->session->userdata['user'];
 
         $this->db   ->select('*, Post.id_post, Post.id_user, CASE WHEN Likes.id_user IS NULL THEN 0 ELSE 1 END AS likes', false)
@@ -39,7 +39,7 @@ class MPost extends CI_Model {
         $all_users_ids = $this->MFollows->getFollowedUserIds($user->id_user);
         array_push($all_users_ids, $user->id_user);
 
-        $this->prepareToGetPostByUserIds($all_users_ids);
+        $this->prepareToGetPosts($all_users_ids);
 
         if ($user->type == 's') {
             $this->db->or_where('Post.sponsored', 1);
@@ -49,7 +49,7 @@ class MPost extends CI_Model {
     }
 
     public function getPostsForProfile($id_user) {
-        $this->prepareToGetPostByUserIds($id_user);
+        $this->prepareToGetPosts($id_user);
 
         return $this->db->get()->result();
     }
