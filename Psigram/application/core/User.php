@@ -108,8 +108,9 @@ class User extends PSIController {
 
     public function addCommentHandler($id_post) {
         $comment_text = $this->input->post('comment_text');
-        $this->MComment->addComment($comment_text, $this->user->id_user, $id_post);
-
+        if ( ! empty($comment_text)) {
+            $this->MComment->addComment($comment_text, $this->user->id_user, $id_post);
+        }
         $this->redirectToLastURI();
     }
 
