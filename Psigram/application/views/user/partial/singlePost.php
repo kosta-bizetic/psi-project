@@ -2,39 +2,58 @@
 <div class="container-fluid" style="padding: 1%">
     <div class="row justify-content-center">
         <div class="col-md-4">
-            <a href="<?php echo site_url("$this->class_name/profile/$post->id_user") ?>"><strong>@<?php echo $post->username ?></strong></a>
-            <?php
-                if ($this->user->type == "a" || $this->user->id_user == $post->id_user) {
-                    echo '<a href="'.site_url($this->class_name.'/deletePostHandler/'.$post->id_post).'"><strong style="float: right">X</strong></a>';
-                }
-            ?>
-            <br/>
-            <img ondblclick="location.href='<?php echo site_url("$this->class_name/likeHandler/".$post->id_post."/".$post->likes)?>'" src="<?php echo base_url('/uploads/'.$post->image_name) ?>" class="img-fluid">
-            <br/>
-            <a href="<?php echo site_url("$this->class_name/likers/$post->id_post") ?>">
-            <strong>
+            <div style="text-align: center;">
+                <a href="<?php echo site_url("$this->class_name/profile/$post->id_user") ?>"><strong style="float:left">@<?php echo $post->username ?></strong></a>
                 <?php
-                    if ($post->likes) {
-                        if ($post->num_likes == 2) {
-                            echo 'You and '.($post->num_likes - 1).' other liked this.';
-                        } else {
-                            echo 'You and '.($post->num_likes - 1).' others liked this.';
-                        }
-                    } else {
-                        if ($post->num_likes == 1) {
-                            echo $post->num_likes.' person likes this.';
-                        } else {
-                            echo $post->num_likes.' people like this.';
-                        }
+                    if ($post->sponsored) {
+                        echo '<strong style="display: inline-block">Sponsored</strong>';
+                    }
+
+                    if ($this->user->type == "a" || $this->user->id_user == $post->id_user) {
+                        echo '<a href="'.site_url($this->class_name.'/deletePostHandler/'.$post->id_post).'"><strong style="float: right">X</strong></a>';
                     }
                 ?>
-            </strong>
-            </a>
-            <?php
-                if ($show_comments_link) {
-                    echo '<a style="float: right" href="'.site_url("$this->class_name/post/$post->id_post").'"><strong>View comments</strong></a>';
-                }
-            ?>
+            </div>
+            <br/>
+            <div style="text-align: center">
+                <img ondblclick="location.href='<?php echo site_url("$this->class_name/likeHandler/".$post->id_post."/".$post->likes)?>'" src="<?php echo base_url('/uploads/'.$post->image_name) ?>" class="img-fluid">
+            </div>
+            <div style="text-align: center">
+                <a href="<?php echo site_url("$this->class_name/likers/$post->id_post") ?>">
+                    <strong style="float:left">
+                        <?php
+                            if ($post->likes) {
+                                if ($post->num_likes == 2) {
+                                    echo 'You and '.($post->num_likes - 1).' other liked this.';
+                                } else {
+                                    echo 'You and '.($post->num_likes - 1).' others liked this.';
+                                }
+                            } else {
+                                if ($post->num_likes == 1) {
+                                    echo $post->num_likes.' person likes this.';
+                                } else {
+                                    echo $post->num_likes.' people like this.';
+                                }
+                            }
+                        ?>
+                    </strong>
+                </a>
+                <?php
+                    if ($this->user->type == "b" && $this->user->id_user == $post->id_user) {
+                        echo '<a href="'.site_url("$this->class_name/sponsorHandler/$post->id_post").'"><strong>';
+                        if ($post->sponsored) {
+                            echo 'Unpromote post';
+                        } else {
+                            echo 'Promote post';
+                        }
+                        echo '</strong>';
+                    }
+
+                    if ($show_comments_link) {
+                        echo '<a style="float: right" href="'.site_url("$this->class_name/post/$post->id_post").'"><strong>View comments</strong></a>';
+                    }
+                ?>
+            </div>
         </div>
     </div>
 </div>
