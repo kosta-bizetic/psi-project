@@ -23,7 +23,11 @@
                     }
                 ?>
             </strong>
-            <a href="<?php echo site_url("$this->class_name/post/$post->id_post") ?>">View comments.</a>
+            <?php
+                if ($show_comments_link) {
+                    echo '<a href="'.site_url("$this->class_name/post/$post->id_post").'">View comments.</a>';
+                }
+            ?>
         </div>
     </div>
 </div>

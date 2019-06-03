@@ -108,6 +108,13 @@ class User extends PSIController {
         $this->load->view('user/post.php', $data);
     }
 
+    public function addCommentHandler($id_post) {
+        $comment_text = $this->input->post('comment_text');
+        $this->MComment->addComment($comment_text, $this->user->id_user, $id_post);
+
+        redirect("$this->class_name/post/$id_post");
+    }
+
     public function logOut() {
         $this->session->unset_userdata('user');
         redirect();
