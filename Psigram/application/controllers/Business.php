@@ -17,5 +17,13 @@ class Business extends User {
         }
     }
 
-
+    public function sponsorHandler($id_post) {
+        $post = $this->MPost->getPost($id_post);
+        if ($post->id_user == $this->user->id_user) {
+            $this->MPost->setSponsored($id_post, $post->sponsored ? 0 : 1);
+            $this->redirectToLastURI();
+        } else {
+            redirect();
+        }
+    }
 }

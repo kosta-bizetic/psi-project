@@ -67,10 +67,18 @@ class MPost extends CI_Model {
         return $this->db->get()->result();
     }
 
-    public function getNumberOfPosts($id_user) {
-        return $this->db->from("Post")
-                        ->where("id_user", $id_user)
-                        ->count_all_results();
+    public function isSponsored($id_post) {
+        return $this->db->from('Post')
+                        ->where('id_post', $id_post)
+                        ->get()
+                        ->row()->sponsored == 1;
+    }
+
+    public function setSponsored($id_post, $value) {
+        $this->db   ->from('Post')
+                    ->where('id_post', $id_post)
+                    ->set('sponsored', $value)
+                    ->update();
     }
 
     public function getPost($id_post) {
