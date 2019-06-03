@@ -14,6 +14,7 @@ class MComment extends CI_Model {
         return $this->db->from('Comment')
                         ->join('User', 'User.id_user = Comment.id_user')
                         ->where('id_post', $id_post)
+                        ->order_by('Comment.timestamp ASC')
                         ->get()
                         ->result();
     }
