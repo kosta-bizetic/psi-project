@@ -21,6 +21,7 @@ class User extends PSIController {
         $this->load->model('MUser');
         $this->load->model('MFollows');
         $this->load->model('MLikes');
+        $this->load->model('MComment');
 
         $this->data['title'] = 'Psigram';
         $this->user = $this->session->userdata['user'];
@@ -85,17 +86,26 @@ class User extends PSIController {
         redirect("$this->class_name/profile/".$id_user_followed);
     }
 
-    public function likeHandler($id_post, $likes, $redirectPage, $user=null) {
+    public function likeHandler($id_post, $likes, $redirectPage, $id=null) {
         if (!$likes) {
             $this->MLikes->addLikes($this->user->id_user, $id_post);
         } else {
             $this->MLikes->removeLikes($this->user->id_user, $id_post);
         }
         $redirectString = "$this->class_name/$redirectPage";
-        if ($user != null) {
-            $redirectString .= "/$user";
+        if ($id != null) {
+            $redirectString .= "/$id";
         }
         redirect($redirectString);
+    }
+
+    public function post($id_post) {
+        $data = array(
+            'post' => $this->MPost->getSinglePost($id_post),
+            'comments' => $this->MComment->getComments($id_post)
+        );
+
+        $this->load->view('user/post.php', $data);
     }
 
     public function logOut() {

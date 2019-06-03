@@ -24,6 +24,19 @@ class MPost extends CI_Model {
         return $this->db->get('post')->result();
     }
 
+    public function getSinglePost($id_post) {
+        $user = $this->session->userdata['user'];
+
+        return $this->db->select('*, Post.id_post, Post.id_user, CASE WHEN Likes.id_user IS NULL THEN 0 ELSE 1 END AS likes', false)
+                        ->from('Post')
+                        ->join('User', 'User.id_user = Post.id_user')
+                        ->join('Likes', "Likes.id_post = Post.id_post AND Likes.id_user = $user->id_user", "left")
+                        ->where('Post.id_post', $id_post)
+                        ->order_by('Post.timestamp DESC')
+                        ->get()
+                        ->row();
+    }
+
     private function prepareToGetPosts($user_ids) {
         $user = $this->session->userdata['user'];
 

@@ -11,8 +11,8 @@ class MComment extends CI_Model {
     }
 
     public function getComments($id_post) {
-        return $this->db->from('Comments')
-                        ->join('User', 'User.id_user = Comments.id_user')
+        return $this->db->from('Comment')
+                        ->join('User', 'User.id_user = Comment.id_user')
                         ->where('id_post', $id_post)
                         ->get()
                         ->result();
