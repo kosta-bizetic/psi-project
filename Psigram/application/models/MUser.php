@@ -37,8 +37,16 @@ class MUser extends CI_Model {
     }
 
     public function searchUsers($search_text) {
-        return $this->db->from('User')
-                        ->get()
+        $words = preg_split("/[\s]+/", strtolower($search_text));
+        $this->db   ->from('User')
+                    ->like('name', '', 'none');
+        foreach ($words as $word) {
+            $this->db->or_like('LOWER(username)', $word, 'after');
+            $this->db->or_like('LOWER(name)', $word, 'after');
+            $this->db->or_like('LOWER(surname)', $word, 'after');
+        }
+
+        return $this->db->get()
                         ->result();
     }
 

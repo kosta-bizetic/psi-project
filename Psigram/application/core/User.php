@@ -108,7 +108,9 @@ class User extends PSIController {
 
     public function search() {
         $this->preparePosttitle(__FUNCTION__);
-        $this->data['users'] = $this->MUser->getAllUsers();
+        
+        $search_text = $this->input->post('search_text');
+        $this->data['users'] = $this->MUser->searchUsers($search_text);
 
         $this->load->view('user/userList.php', $this->data);
     }
