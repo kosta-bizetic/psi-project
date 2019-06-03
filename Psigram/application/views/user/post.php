@@ -32,7 +32,7 @@ and open the template in the editor.
                         </tbody>
                     </table>
                     <form method="post" action='<?php echo site_url("$this->class_name/addCommentHandler/$post->id_post") ?>'>
-                        <input type="text" name="comment_text" class="form-control" placeholder="Add a comment">
+                        <input type="text" name="comment_text" class="form-control" placeholder="Add a comment" required>
                     </form>
                 </div>
             </div>

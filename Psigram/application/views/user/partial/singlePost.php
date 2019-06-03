@@ -3,7 +3,11 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <strong>@<?php echo $post->username ?></strong>
-            <strong style="float: right">X</strong>
+            <?php
+                if ($this->user->type == "a" || $this->user->id_user == $post->id_user) {
+                    echo '<a href="'.site_url($this->class_name.'/deletePostHandler/'.$post->id_post).'"><strong style="float: right">X</strong></a>';
+                }
+            ?>
             <br/>
             <img ondblclick="location.href='<?php echo site_url("$this->class_name/likeHandler/".$post->id_post."/".$post->likes)?>'" src="<?php echo base_url('/uploads/'.$post->image_name) ?>" class="img-fluid">
             <br/>
