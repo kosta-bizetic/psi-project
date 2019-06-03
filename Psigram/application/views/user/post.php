@@ -23,7 +23,7 @@ and open the template in the editor.
                             <?php
                                 foreach ($comments as $comment) {
                                     echo "<tr class='table-primary'>
-                                            <th scope='row'>@$comment->username</td>
+                                            <th scope='row'><a href='".site_url("$this->class_name/profile/$comment->id_user")."'>@".$comment->username."</a></td>
                                             <td style='word-wrap: break-word; width: 60%'>$comment->text</td>
                                             <td style='float:right; text-align:center'>".substr($comment->timestamp, 0, 16)."</td>
                                             <td style='width: 5%'>";
