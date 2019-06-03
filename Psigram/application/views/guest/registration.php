@@ -15,9 +15,7 @@
         </style>
     </head>
     <body style='background-image: url("<?php echo base_url('/assets/backgroundImage.jpg') ?>")'>
-        <?php
-            $this->load->view('guest/partial/header.php');
-        ?>
+        <?php $this->load->view('guest/partial/header.php'); ?>
         <div class="container-fluid" style="padding-top: 2%">
             <div class="row">
                 <form class="col-md-2 offset-md-4" method="post" action="<?php echo site_url("Guest/registrationHandler");?>">

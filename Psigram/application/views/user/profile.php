@@ -28,6 +28,8 @@
                         } else {
                             echo '<td><a href="'.site_url("$this->class_name/unfollowHandler/".$user->id_user).'"><button type="button" class="btn btn-danger">Unfollow</button></a></td>';
                         }
+                    } else {
+                        echo '<td><a href="'.site_url("$this->class_name/editProfile").'"><button type="button" class="btn btn-primary">Edit Profile</button></a></td>';
                     }
 
                     for ($i = 0; $i < 20; $i++) {

@@ -69,6 +69,10 @@ class User extends PSIController {
         $this->load->view('user/profile.php', $this->data);
     }
 
+    public function editProfile() {
+        $this->load->view('user/editProfile.php', $this->data);
+    }
+
     public function followHandler($id_user_followed) {
         $this->MFollows->addFollows($this->user->id_user, $id_user_followed);
         $this->redirectToLastURI();
