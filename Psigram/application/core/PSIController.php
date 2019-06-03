@@ -11,6 +11,26 @@ class PSIController extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+
+    }
+
+    public function _remap($method, $params = array())
+    {
+        if ( ! $this->session->has_userdata('curr_uri')) {
+            $this->session->userdata['curr_uri'] = '';
+        }
+        $this->session->userdata['old_uri'] = $this->session->userdata['curr_uri'];
+        $this->session->userdata['curr_uri'] = $this->uri->uri_string();
+
+        if (method_exists($this, $method))
+        {
+                return call_user_func_array(array($this, $method), $params);
+        }
+        show_404();
+    }
+
+    protected function redirectToLastURI() {
+        redirect($this->session->userdata['old_uri']);
     }
 
     protected function preparePosttitle($function) {

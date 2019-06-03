@@ -18,4 +18,14 @@ class Admin extends User {
 
         $this->class_name = get_class($this);
     }
+
+    public function deleteCommentHandler($id_comment) {
+        $this->MComment->removeComment($id_comment);
+        $this->redirectToLastURI();
+    }
+
+    public function deletePostHandler($id_post) {
+        $this->MPost->removePost($id_post);
+        $this->redirectToLastURI();
+    }
 }

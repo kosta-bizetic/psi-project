@@ -19,6 +19,13 @@ class MComment extends CI_Model {
                         ->result();
     }
 
+    public function getComment($id_comment) {
+        return $this->db->from('Comments')
+                        ->where('id_comment', $id_comment)
+                        ->get()
+                        ->row();
+    }
+
     public function addComment($text, $id_user, $id_post) {
         $data = array(
             'text' => $text,

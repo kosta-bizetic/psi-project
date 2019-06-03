@@ -17,8 +17,9 @@ class User extends PSIController {
             redirect();
         }
 
-        $this->load->model('MPost');
         $this->load->model('MUser');
+        $this->load->model('MPost');
+        $this->load->model('MComment');
         $this->load->model('MFollows');
         $this->load->model('MLikes');
         $this->load->model('MComment');
@@ -86,24 +87,29 @@ class User extends PSIController {
         redirect("$this->class_name/profile/".$id_user_followed);
     }
 
-    public function likeHandler($id_post, $likes, $redirectPage, $id=null) {
+    public function likeHandler($id_post, $likes) {
         if (!$likes) {
             $this->MLikes->addLikes($this->user->id_user, $id_post);
         } else {
             $this->MLikes->removeLikes($this->user->id_user, $id_post);
         }
-        $redirectString = "$this->class_name/$redirectPage";
-        if ($id != null) {
-            $redirectString .= "/$id";
-        }
-        redirect($redirectString);
+
+        $this->redirectToLastURI();
     }
 
     public function post($id_post) {
         $this->preparePosttitle(__FUNCTION__);
 
+        $post = $this->MPost->getSinglePost($id_post);
+        if ($post == NULL) {
+            switch ($this->user->type) {
+                case 'a': redirect($this->class_name."/feed");
+                default: redirect($this->class_name."/profile");
+            }
+        }
+
         $data = array(
-            'post' => $this->MPost->getSinglePost($id_post),
+            'post' => $post,
             'comments' => $this->MComment->getComments($id_post)
         );
 
@@ -114,7 +120,7 @@ class User extends PSIController {
         $comment_text = $this->input->post('comment_text');
         $this->MComment->addComment($comment_text, $this->user->id_user, $id_post);
 
-        redirect("$this->class_name/post/$id_post");
+        $this->redirectToLastURI();
     }
 
     public function logOut() {
@@ -143,5 +149,25 @@ class User extends PSIController {
         $this->data['users'] = $this->MUser->getFollowing($user_id);
 
         $this->load->view('user/userList.php', $this->data);
+    }
+
+    public function deleteCommentHandler($id_comment) {
+        $comment = $this->MComment->getComment($id_comment);
+        if ($comment->id_user == $this->user->id_user) {
+            $this->MComment->removeComment($id_comment);
+            $this->redirectToLastURI();
+        } else {
+            redirect();
+        }
+    }
+
+    public function deletePostHandler($id_post) {
+        $post = $this->MPost->getPost($id_post);
+        if ($post->id_user == $this->user->id_user) {
+            $this->MPost->removePost($id_post);
+            $this->redirectToLastURI();
+        } else {
+            redirect();
+        }
     }
 }

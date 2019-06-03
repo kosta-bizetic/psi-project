@@ -20,7 +20,7 @@ class MPost extends CI_Model {
     }
 
     public function getAllPosts() {
-        $this->db->order_by('id_post DESC');
+        $this->db->order_by('timestamp DESC');
         return $this->db->get('post')->result();
     }
 
@@ -67,10 +67,16 @@ class MPost extends CI_Model {
         return $this->db->get()->result();
     }
 
-    public function getNumberOfPosts($user_id) {
+    public function getNumberOfPosts($id_user) {
         return $this->db->from("Post")
-                        ->where("id_user", $user_id)
+                        ->where("id_user", $id_user)
                         ->count_all_results();
+    }
+
+    public function getPost($id_post) {
+        return $this->db->from("Post")
+                        ->where("id_post", $id_post)
+                        ->get()->row();
     }
 
     public function addPost($image_name, $id_user) {

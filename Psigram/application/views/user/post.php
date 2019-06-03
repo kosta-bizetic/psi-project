@@ -12,7 +12,7 @@ and open the template in the editor.
         <?php
             $this->load->view('user/partial/header.php', $this->data);
 
-            $this->load->view('user/partial/singlePost.php', ['post' => $post, 'redirectPage' => "post/$post->id_post", 'show_comments_link' => false]);
+            $this->load->view('user/partial/singlePost.php', ['post' => $post, 'show_comments_link' => false]);
         ?>
 
         <div class='container-fluid'>
