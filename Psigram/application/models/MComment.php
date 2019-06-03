@@ -10,7 +10,7 @@ class MComment extends CI_Model {
         parent::__construct();
     }
 
-    public function getCommentsForPost($id_post) {
+    public function getComments($id_post) {
         return $this->db->from('Comments')
                         ->join('User', 'User.id_user = Comments.id_user')
                         ->where('id_post', $id_post)

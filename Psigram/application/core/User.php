@@ -71,9 +71,6 @@ class User extends PSIController {
         $profile_user = $this->MUser->getUserById($user_id);
         $this->data['user'] = $profile_user;
         $this->data['follows'] = $this->MFollows->getFollows($this->user->id_user, $profile_user->id_user);
-        $this->data['num_posts'] = $this->MPost->getNumberOfPosts($profile_user->id_user);
-        $this->data['num_followers'] = $this->MFollows->getNumberOfFollowers($profile_user->id_user);
-        $this->data['num_following'] = $this->MFollows->getNumberOfFollowing($profile_user->id_user);
         $this->data['posts'] = $this->MPost->getPostsForProfile($profile_user->id_user);
         $this->load->view('user/profile.php', $this->data);
     }
@@ -108,7 +105,7 @@ class User extends PSIController {
 
     public function search() {
         $this->preparePosttitle(__FUNCTION__);
-        
+
         $search_text = $this->input->post('search_text');
         $this->data['users'] = $this->MUser->searchUsers($search_text);
 

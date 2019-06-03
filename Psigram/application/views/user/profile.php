@@ -34,9 +34,9 @@
                         echo '<td></td>';
                     }
                 ?>
-                            <td><?php echo $num_posts; ?><br>Posts</td>
-                            <td><?php echo $num_followers; ?><br><a href="<?php echo site_url("$this->class_name/followers/".$user->id_user); ?>">Followers</a></td>
-                            <td><?php echo $num_following; ?><br><a href="<?php echo site_url("$this->class_name/following/".$user->id_user); ?>">Following</a></td>
+                            <td><?php echo $user->num_posts; ?><br>Posts</td>
+                            <td><?php echo $user->num_followers; ?><br><a href="<?php echo site_url("$this->class_name/followers/".$user->id_user); ?>">Followers</a></td>
+                            <td><?php echo $user->num_following; ?><br><a href="<?php echo site_url("$this->class_name/following/".$user->id_user); ?>">Following</a></td>
                         </tr>
                     </tbody>
                 </table>
