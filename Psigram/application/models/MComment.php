@@ -20,7 +20,7 @@ class MComment extends CI_Model {
     }
 
     public function getComment($id_comment) {
-        return $this->db->from('Comments')
+        return $this->db->from('Comment')
                         ->where('id_comment', $id_comment)
                         ->get()
                         ->row();

@@ -26,6 +26,14 @@ and open the template in the editor.
                                             <th scope='row'>@$comment->username</td>
                                             <td style='word-wrap: break-word; width: 60%'>$comment->text</td>
                                             <td style='float:right; text-align:center'>".substr($comment->timestamp, 0, 16)."</td>
+                                            <td style='width: 5%'>";
+
+                                    if ($this->user->type == "a" ||
+                                            $this->user->id_user == $comment->id_user) {
+                                        echo '<a href="'.site_url("$this->class_name/deleteCommentHandler/$comment->id_comment").'">X</a>';
+                                    }
+
+                                    echo "  </td>
                                           </tr>";
                                 }
                             ?>
