@@ -2,7 +2,7 @@
 <div class="container-fluid" style="padding: 1%">
     <div class="row justify-content-center">
         <div class="col-md-4">
-            <strong>@<?php echo $post->username ?></strong>
+            <a href="<?php echo site_url("$this->class_name/profile/$post->id_user") ?>"><strong>@<?php echo $post->username ?></strong></a>
             <?php
                 if ($this->user->type == "a" || $this->user->id_user == $post->id_user) {
                     echo '<a href="'.site_url($this->class_name.'/deletePostHandler/'.$post->id_post).'"><strong style="float: right">X</strong></a>';
