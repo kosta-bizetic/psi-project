@@ -15,7 +15,5 @@ class Business extends User {
             || $this->session->userdata['user']->type != 'b') {
             redirect();
         }
-
-        $this->class_name = get_class($this);
     }
 }

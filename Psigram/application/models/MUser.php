@@ -50,18 +50,18 @@ class MUser extends CI_Model {
                         ->result();
     }
 
-    public function getFollowers($user_id) {
+    public function getFollowers($id_user) {
         return $this->db->from('Follows')
                         ->join('User', 'User.id_user = Follows.id_user_following')
-                        ->where('Follows.id_user_followed', $user_id)
+                        ->where('Follows.id_user_followed', $id_user)
                         ->get()
                         ->result();
     }
 
-    public function getFollowing($user_id) {
+    public function getFollowing($id_user) {
         return $this->db->from('Follows')
                         ->join('User', 'User.id_user = Follows.id_user_followed')
-                        ->where('Follows.id_user_following', $user_id)
+                        ->where('Follows.id_user_following', $id_user)
                         ->get()
                         ->result();
     }

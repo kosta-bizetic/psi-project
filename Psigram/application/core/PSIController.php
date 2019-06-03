@@ -11,11 +11,14 @@ class PSIController extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-
     }
 
     public function _remap($method, $params = array())
     {
+        $this->preparePosttitle($method);
+        $this->data['title'] = 'Psigram';
+        $this->class_name = get_class($this);
+
         if ( ! $this->session->has_userdata('curr_uri')) {
             $this->session->userdata['curr_uri'] = '';
         }

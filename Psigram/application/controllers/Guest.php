@@ -16,9 +16,6 @@ class Guest extends PSIController {
         }
 
         $this->load->model('MUser');
-
-        $this->data['title'] = 'Psigram';
-        $this->class_name = get_class($this);
     }
 
     public function index() {
@@ -26,7 +23,6 @@ class Guest extends PSIController {
     }
 
     public function logIn($message=null) {
-        $this->preparePosttitle(__FUNCTION__);
         $this->data['message'] = $message;
 
         $this->load->view('guest/login', $this->data);
@@ -59,7 +55,6 @@ class Guest extends PSIController {
     }
 
     public function registration($message=null) {
-        $this->preparePosttitle(__FUNCTION__);
         $this->data['message'] = $message;
 
         $this->load->view("guest/registration", $this->data);

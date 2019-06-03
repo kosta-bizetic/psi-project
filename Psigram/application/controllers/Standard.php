@@ -15,8 +15,5 @@ class Standard extends User {
             || $this->session->userdata['user']->type != 's') {
             redirect();
         }
-
-        $this->class_name = get_class($this);
     }
-
 }

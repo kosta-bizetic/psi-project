@@ -15,8 +15,6 @@ class Admin extends User {
             || $this->session->userdata['user']->type != 'a') {
             redirect();
         }
-
-        $this->class_name = get_class($this);
     }
 
     public function deleteCommentHandler($id_comment) {

@@ -24,9 +24,7 @@ class User extends PSIController {
         $this->load->model('MLikes');
         $this->load->model('MComment');
 
-        $this->data['title'] = 'Psigram';
         $this->user = $this->session->userdata['user'];
-        $this->class_name = get_class($this);
     }
 
     public function index() {
@@ -34,16 +32,12 @@ class User extends PSIController {
     }
 
     public function feed() {
-        $this->preparePosttitle(__FUNCTION__);
         $this->data['posts'] = $this->MPost->getPostsForFeed($this->user);
-
 
         $this->load->view('user/feed.php', $this->data);
     }
 
     public function addPost() {
-        $this->preparePosttitle(__FUNCTION__);
-
         $this->load->view('user/addPost.php', $this->data);
     }
 
@@ -68,8 +62,6 @@ class User extends PSIController {
     }
 
     public function profile($user_id) {
-        $this->preparePosttitle(__FUNCTION__);
-
         $profile_user = $this->MUser->getUserById($user_id);
         $this->data['user'] = $profile_user;
         $this->data['follows'] = $this->MFollows->getFollows($this->user->id_user, $profile_user->id_user);
@@ -79,12 +71,12 @@ class User extends PSIController {
 
     public function followHandler($id_user_followed) {
         $this->MFollows->addFollows($this->user->id_user, $id_user_followed);
-        redirect("$this->class_name/profile/".$id_user_followed);
+        $this->redirectToLastURI();
     }
 
     public function unfollowHandler($id_user_followed) {
         $this->MFollows->removeFollows($this->user->id_user, $id_user_followed);
-        redirect("$this->class_name/profile/".$id_user_followed);
+        $this->redirectToLastURI();
     }
 
     public function likeHandler($id_post, $likes) {
@@ -98,13 +90,11 @@ class User extends PSIController {
     }
 
     public function post($id_post) {
-        $this->preparePosttitle(__FUNCTION__);
-
         $post = $this->MPost->getSinglePost($id_post);
         if ($post == NULL) {
             switch ($this->user->type) {
-                case 'a': redirect($this->class_name."/feed");
-                default: redirect($this->class_name."/profile");
+                case 'a': redirect($this->class_name.'/feed');
+                default: redirect($this->class_name.'/profile/'.$this->user->id_user);
             }
         }
 
@@ -129,8 +119,6 @@ class User extends PSIController {
     }
 
     public function search() {
-        $this->preparePosttitle(__FUNCTION__);
-
         $search_text = $this->input->post('search_text');
         $this->data['users'] = $this->MUser->searchUsers($search_text);
 
@@ -138,14 +126,12 @@ class User extends PSIController {
     }
 
     public function followers($user_id) {
-        $this->preparePosttitle(__FUNCTION__);
         $this->data['users'] = $this->MUser->getFollowers($user_id);
 
         $this->load->view('user/userList.php', $this->data);
     }
 
     public function following($user_id) {
-        $this->preparePosttitle(__FUNCTION__);
         $this->data['users'] = $this->MUser->getFollowing($user_id);
 
         $this->load->view('user/userList.php', $this->data);
