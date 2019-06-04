@@ -33,7 +33,8 @@
                         </div>
                         <div class="form-group">
                           <label for="confirm-password">Confirm password</label>
-                          <input type="password" id="confirm-password" class="form-control" name="confirm-password" placeholder="Confirm password" onkeyup='check();' required>
+                          <input type="password" id="confirm-password" class="form-control" name="confirm-password" value="<?php echo set_value('confirm-password'); ?>" placeholder="Confirm password" onkeyup='check();' required>
+                          <?php echo form_error('confirm-password'); ?>
                           <span id='message'></span>
                         </div>
                         <div class="form-group">
@@ -103,7 +104,7 @@
                 document.getElementById('message').innerHTML = 'Matching';
                 document.getElementById('submit').disabled = false;
               } else {
-                document.getElementById('message').style.color = 'lightred';
+                document.getElementById('message').style.color = 'red';
                 document.getElementById('message').innerHTML = 'Not matching';
                 document.getElementById('submit').disabled = true;
               }

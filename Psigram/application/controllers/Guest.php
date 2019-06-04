@@ -37,6 +37,7 @@ class Guest extends PSIController {
         $this->form_validation->set_rules('username', 'Username', 'required|is_unique[User.username]');
         $this->form_validation->set_message('is_unique', '{field} already exists');
         $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('confirm-password', 'Confirm Password', 'required|matches[password]');
         $this->form_validation->set_rules('name', 'Name', 'required|alpha_numeric_spaces');
         $this->form_validation->set_rules('surname', 'Last name', 'required|alpha_numeric_spaces');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[User.email]');
