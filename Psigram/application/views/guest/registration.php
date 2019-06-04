@@ -27,28 +27,28 @@
                     <fieldset>
                         <div class="form-group">
                           <label for="username">Username</label>
-                          <input type="text" class="form-control" name="username" placeholder="Username" required>
+                          <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
                         </div>
                         <div class="form-group">
-                          <label for="exampleInputPassword1">Password</label>
-                          <input type="password" class="form-control" name="password" placeholder="Password" required>
+                          <label for="password">Password</label>
+                          <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                         </div>
                         <div class="form-group">
-                          <label for="Name">Name</label>
-                          <input type="text" class="form-control" name="name" placeholder="Name" required>
+                          <label for="name">Name</label>
+                          <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
                         </div>
                         <div class="form-group">
                           <label for="surname">Last name</label>
-                          <input type="text" class="form-control" name="surname" placeholder="Last name" required>
+                          <input type="text" class="form-control" id="surname" name="surname" placeholder="Last name" required>
                         </div>
                         <div class="form-group">
                           <label for="email">Email address</label>
-                          <input type="email" class="form-control" name="email" placeholder="Email address" required>
+                          <input type="email" class="form-control" id="email" name="email" placeholder="Email address" required>
                           <small id="emailHelp" class="email-sharing form-text">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
-                          <label for="date_of_brith">Date of birth</label>
-                          <input type="date" class="form-control" name="date_of_birth" required>
+                          <label for="date_of_birth">Date of birth</label>
+                          <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required>
                         </div>
                         <fieldset class="form-group">
                           <label for="gender">Gender</label>

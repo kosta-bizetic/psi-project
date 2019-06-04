@@ -45,7 +45,7 @@ class User extends PSIController {
         $config['upload_path']          = 'uploads//';
         $config['file_name']            = $this->user->username."_".time();
         $config['allowed_types']        = 'gif|jpg|png';
-        $config['max_size']             = 2000;
+        $config['max_size']             = 4000;
         $config['max_width']            = 1024*4;
         $config['max_height']           = 768*4;
 
@@ -62,7 +62,7 @@ class User extends PSIController {
     }
 
     public function profile($user_id) {
-        $profile_user = $this->MUser->getUserById($user_id);
+        $profile_user = $this->MUser->getUser($user_id);
         $this->data['user'] = $profile_user;
         $this->data['follows'] = $this->MFollows->getFollows($this->user->id_user, $profile_user->id_user);
         $this->data['posts'] = $this->MPost->getPostsForProfile($profile_user->id_user);
@@ -70,7 +70,14 @@ class User extends PSIController {
     }
 
     public function editProfile() {
+
+        // $this->redirectToLastURI();
+        $this->data['user'] = $this->user;
         $this->load->view('user/editProfile.php', $this->data);
+    }
+
+    public function editProfileHandler() {
+        echo $this->input->post('submit');
     }
 
     public function followHandler($id_user_followed) {

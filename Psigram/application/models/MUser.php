@@ -23,7 +23,7 @@ class MUser extends CI_Model {
                         ->row();
     }
 
-    public function getUserById($id_user) {
+    public function getUser($id_user) {
         return $this->db->from('User')
                         ->where('id_user', $id_user)
                         ->get()
@@ -96,6 +96,16 @@ class MUser extends CI_Model {
 
     public function addUser($data) {
         $this->db->insert('user', $data);
+    }
+
+    public function logInValidation($password) {
+        $username = $this->input->post('username');
+        $user = $this->getUserByUsername($username);
+        if ($user == NULL || $user->password != $password) {
+            return FALSE;
+        }
+        $this->session->set_userdata('user', $user);
+        return TRUE;
     }
 
 }

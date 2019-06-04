@@ -11,6 +11,8 @@ class PSIController extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+
+        $this->form_validation->set_error_delimiters('<font color="red">', '</font>');
     }
 
     public function _remap($method, $params = array())

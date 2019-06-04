@@ -12,45 +12,25 @@ class Guest extends PSIController {
     public function __construct() {
         parent::__construct();
         if ($this->session->has_userdata('user')) {
-            $this->redirectToType($this->session->userdata('user')->type);
+            $this->redirectToType();
         }
 
         $this->load->model('MUser');
     }
 
     public function index() {
-        redirect("$this->class_name/login");
+        redirect("$this->class_name/logIn");
     }
 
-    public function logIn($message=null) {
-        $this->data['message'] = $message;
-
-        $this->load->view('guest/login', $this->data);
-    }
-
-    public function loginHandler() {
-        $this->form_validation->
-           set_rules('username', "username", "required");
-        $this->form_validation->
-           set_rules('password', "password", "required");
+    public function logIn() {
+        $this->form_validation->set_rules('username', 'Username');
+        $this->form_validation->set_rules('password', 'Password', array(array('logInValidation', array($this->MUser, 'logInValidation'))));
+        $this->form_validation->set_message('logInValidation', 'Wrong username or password');
 
         if ($this->form_validation->run() == FALSE){
-            $this->index();
+            $this->load->view('guest/login', $this->data);
         } else {
-            $user = $this->MUser->getUserByUsername($this->input->post('username'));
-
-            if($user != null){
-                if ($user->password == $this->input->post('password')){
-                    $this->session->set_userdata
-                            ('user', $user);
-
-                    $this->redirectToType($user->type);
-                } else {
-                    $this->login('Incorrect password.<br/>');
-                }
-            } else {
-                $this->login('Incorrect username.<br/>');
-            }
+            $this->redirectToType();
         }
     }
 
@@ -96,7 +76,8 @@ class Guest extends PSIController {
         }
     }
 
-    private function redirectToType($type) {
+    private function redirectToType() {
+        $type = $this->session->userdata('user')->type;
         switch ($type) {
             case 'a':
                 redirect('Admin');

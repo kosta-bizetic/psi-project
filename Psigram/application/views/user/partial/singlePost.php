@@ -24,9 +24,11 @@
                         <?php
                             if ($post->likes) {
                                 if ($post->num_likes == 2) {
-                                    echo 'You and '.($post->num_likes - 1).' other liked this.';
+                                    echo 'You and '.($post->num_likes - 1).' other like this.';
+                                } else if ($post->num_likes == 1) {
+                                    echo 'You like this.';
                                 } else {
-                                    echo 'You and '.($post->num_likes - 1).' others liked this.';
+                                    echo 'You and '.($post->num_likes - 1).' others like this.';
                                 }
                             } else {
                                 if ($post->num_likes == 1) {
