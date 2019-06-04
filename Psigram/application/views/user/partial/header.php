@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
   <a style="padding-right: 8.75%" class="navbar-brand" href="<?php echo site_url("$this->class_name/feed")?>">Psigram</a>
   <div class="collapse navbar-collapse" id="navbarColor01">
     <form class="form-inline my-2 my-lg-0 ml-auto mr-auto" method="post" action="<?php echo site_url("$this->class_name/search");?>">
