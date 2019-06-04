@@ -61,8 +61,11 @@ class User extends PSIController {
         }
     }
 
-    public function profile($user_id) {
-        $profile_user = $this->MUser->getUser($user_id);
+    public function profile($user_id=NULL) {
+        $profile_user = $this->user;
+        if ($user_id != NULL) {
+            $profile_user = $this->MUser->getUser($user_id);
+        }
         $this->data['user'] = $profile_user;
         $this->data['follows'] = $this->MFollows->getFollows($this->user->id_user, $profile_user->id_user);
         $this->data['posts'] = $this->MPost->getPostsForProfile($profile_user->id_user);
@@ -70,14 +73,44 @@ class User extends PSIController {
     }
 
     public function editProfile() {
+        $this->form_validation->set_rules('username', 'Username', array('required', array('otherUsernameDoesntExist', array($this->MUser, "otherUsernameDoesntExist"))));
+        $this->form_validation->set_message('otherUsernameDoesntExist', '{field} already exists');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('name', 'Name', 'required|alpha_numeric_spaces');
+        $this->form_validation->set_rules('surname', 'Last name', 'required|alpha_numeric_spaces');
+        $this->form_validation->set_rules('email', 'Email', array('required', array('otherEmailDoesntExist', array($this->MUser, "otherEmailDoesntExist"))));
+        $this->form_validation->set_message('otherEmailDoesntExist', '{field} already exists');
+        $this->form_validation->set_rules('date_of_birth', 'Date of birth', 'required');
+        $this->form_validation->set_rules('gender', 'Gender', 'required|in_list[m,f]');
+        if ($this->user->type != 'a') {
+            $this->form_validation->set_rules('type', 'Account type', 'required|in_list[s,b]');
+        } else {
+            $this->form_validation->set_rules('type', 'Account type', 'required|in_list[s,b,a]');
+        }
 
-        // $this->redirectToLastURI();
-        $this->data['user'] = $this->user;
-        $this->load->view('user/editProfile.php', $this->data);
-    }
 
-    public function editProfileHandler() {
-        echo $this->input->post('submit');
+        if ($this->form_validation->run() == TRUE) {
+            $data = array(
+                'username' => $this->input->post('username'),
+                'password' => $this->input->post('password'),
+                'name' => $this->input->post('name'),
+                'surname' => $this->input->post('surname'),
+                'email' => $this->input->post('email'),
+                'date_of_birth' => $this->input->post('date_of_birth'),
+                'gender' => $this->input->post('gender'),
+                'type' => $this->input->post('type')
+            );
+
+            $this->MUser->updateUser($this->user->id_user, $data);
+            $user = $this->MUser->getUserByUsername($data['username']);
+
+            $this->session->set_userdata('user', $user);
+
+            $this->redirectToType('profile');
+        } else {
+            $this->data['user'] = $this->user;
+            $this->load->view('user/editProfile.php', $this->data);
+        }
     }
 
     public function followHandler($id_user_followed) {

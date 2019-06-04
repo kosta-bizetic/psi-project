@@ -23,6 +23,7 @@ class Guest extends PSIController {
     }
 
     public function logIn() {
+        $this->form_validation->set_rules('username', 'Username');
         $this->form_validation->set_rules('password', 'Password', array(array('logInValidation', array($this->MUser, 'logInValidation'))));
         $this->form_validation->set_message('logInValidation', 'Wrong username or password');
 
@@ -43,7 +44,7 @@ class Guest extends PSIController {
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[User.email]');
         $this->form_validation->set_rules('date_of_birth', 'Date of birth', 'required');
         $this->form_validation->set_rules('gender', 'Gender', 'required|in_list[m,f]');
-        $this->form_validation->set_rules('type', 'Account', 'required|in_list[s,b]');
+        $this->form_validation->set_rules('type', 'Account type', 'required|in_list[s,b]');
 
         if ($this->form_validation->run() == TRUE) {
             $data = array(
@@ -64,20 +65,6 @@ class Guest extends PSIController {
             $this->redirectToType();
         } else {
             $this->load->view("guest/registration", $this->data);
-        }
-    }
-
-    private function redirectToType() {
-        switch ($this->session->userdata('user')->type) {
-            case 'a':
-                redirect('Admin');
-                break;
-            case 'b':
-                redirect('Business');
-                break;
-            case 's':
-                redirect('Standard');
-                break;
         }
     }
 }

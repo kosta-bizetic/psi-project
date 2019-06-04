@@ -41,4 +41,12 @@ class PSIController extends CI_Controller {
     protected function preparePosttitle($function) {
         return $this->data['posttitle'] = implode(' ', preg_split('/(?=[A-Z])/', ucfirst($function)));
     }
+
+    protected function redirectToType($method='feed') {
+        switch ($this->session->userdata('user')->type) {
+            case 'a': redirect("Admin/$method");
+            case 'b': redirect("Business/$method");
+            case 's': redirect("Standard/$method");
+        }
+    }
 }

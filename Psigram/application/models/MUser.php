@@ -84,6 +84,27 @@ class MUser extends CI_Model {
         $this->db->insert('user', $data);
     }
 
+    public function otherUsernameDoesntExist($username) {
+        return $this->db->from('User')
+                        ->where('username', $username)
+                        ->where("id_user != ", $this->session->userdata['user']->id_user)
+                        ->get()
+                        ->row() == NULL;
+    }
+
+    public function otherEmailDoesntExist($email) {
+        return $this->db->from('User')
+                        ->where('email', $email)
+                        ->where("id_user != ", $this->session->userdata['user']->id_user)
+                        ->get()
+                        ->row() == NULL;
+    }
+
+    public function updateUser($id_user, $data) {
+        $this->db   ->where('id_user', $id_user)
+                    ->update('User', $data);
+    }
+
     public function logInValidation($password) {
         $username = $this->input->post('username');
         $user = $this->getUserByUsername($username);

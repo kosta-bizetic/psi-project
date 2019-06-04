@@ -31,17 +31,20 @@
                           <input type="password" id="password" class="form-control" name="password" value="<?php echo set_value('password'); ?>" placeholder="Password" required>
                           <?php echo form_error('password'); ?>
                         </div>
+
                         <div class="form-group">
                           <label for="confirm-password">Confirm password</label>
                           <input type="password" id="confirm-password" class="form-control" name="confirm-password" value="<?php echo set_value('confirm-password'); ?>" placeholder="Confirm password" onkeyup='check();' required>
                           <?php echo form_error('confirm-password'); ?>
                           <span id='message'></span>
                         </div>
+                        
                         <div class="form-group">
                           <label for="name">Name</label>
                           <input type="text" class="form-control" id="name" name="name" value="<?php echo set_value('name'); ?>" placeholder="Name" required>
                           <?php echo form_error('name'); ?>
                         </div>
+
                         <div class="form-group">
                           <label for="surname">Last name</label>
                           <input type="text" class="form-control" id="surname" name="surname" value="<?php echo set_value('surname'); ?>" placeholder="Last name" required>
@@ -53,11 +56,13 @@
                           <small id="emailHelp" class="email-sharing form-text">We'll never share your email with anyone else.</small>
                           <?php echo form_error('email'); ?>
                         </div>
+
                         <div class="form-group">
                           <label for="date_of_birth">Date of birth</label>
                           <input type="date" class="form-control" id="date_of_birth" value="<?php echo set_value('date_of_birth'); ?>" name="date_of_birth" required>
                           <?php echo form_error('date_of_birth'); ?>
                         </div>
+
                         <fieldset class="form-group">
                           <label for="gender">Gender</label>
                           <div class="form-check">
@@ -74,6 +79,7 @@
                           </div>
                           <?php echo form_error('gender'); ?>
                         </fieldset>
+
                         <fieldset class="form-group">
                           <label for="type">Account type</label>
                           <div class="form-check">
@@ -90,6 +96,7 @@
                           </div>
                           <?php echo form_error('type'); ?>
                         </fieldset>
+
                         <button type="submit" id="submit" class="btn btn-primary">Register</button>
                   </fieldset>
                 </form>
