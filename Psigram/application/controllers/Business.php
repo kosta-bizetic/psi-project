@@ -8,6 +8,7 @@ require_once APPPATH.'\\core\\User.php';
  * @author Kosta
  */
 class Business extends User {
+
     public function __construct() {
         parent::__construct();
 
@@ -15,6 +16,16 @@ class Business extends User {
             || $this->session->userdata['user']->type != 'b') {
             redirect();
         }
+    }
+
+    public function statistics() {
+        $this->data['user'] = $this->user;
+        $this->data['follows'] = false;
+
+        $this->data['gender'] = null; // TODO
+        $this->data['age'] = null; // TODO
+
+        $this->load->view('user/business/statistics.php', $this->data);
     }
 
     public function sponsorHandler($id_post) {

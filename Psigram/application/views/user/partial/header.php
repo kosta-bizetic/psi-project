@@ -17,6 +17,9 @@
         <a class="nav-link" href="<?php echo site_url("$this->class_name/profile/".$this->user->id_user)?>">Profile</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="<?php echo site_url("$this->class_name/statistics")?>">Stats</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="<?php echo site_url("$this->class_name/logOut")?>">Log Out</a>
       </li>
     </ul>
