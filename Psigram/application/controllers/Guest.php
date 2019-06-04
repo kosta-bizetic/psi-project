@@ -23,62 +23,51 @@ class Guest extends PSIController {
     }
 
     public function logIn() {
-        $this->form_validation->set_rules('username', 'Username');
         $this->form_validation->set_rules('password', 'Password', array(array('logInValidation', array($this->MUser, 'logInValidation'))));
         $this->form_validation->set_message('logInValidation', 'Wrong username or password');
 
-        if ($this->form_validation->run() == FALSE){
-            $this->load->view('guest/login', $this->data);
-        } else {
+        if ($this->form_validation->run() == TRUE) {
             $this->redirectToType();
-        }
-    }
-
-    public function registration($message=null) {
-        $this->data['message'] = $message;
-
-        $this->load->view("guest/registration", $this->data);
-    }
-
-    public function registrationHandler() {
-        $data = array(
-            'username' => $this->input->post('username'),
-            'password' => $this->input->post('password'),
-            'name' => $this->input->post('name'),
-            'surname' => $this->input->post('surname'),
-            'email' => $this->input->post('email'),
-            'date_of_birth' => $this->input->post('date_of_birth'),
-            'gender' => $this->input->post('gender'),
-            'type' => $this->input->post('type')
-        );
-
-        $message = "";
-
-        if ($this->MUser->usernameExists($data['username'])) {
-            $message .= "Username already exists. <br/>";
-        }
-        if ($this->MUser->emailExists($data['email'])) {
-            $message .= "Email already exists. <br/>";
-        }
-
-        if ($message != "") {
-            $this->registration($message);
         } else {
+            $this->load->view('guest/login', $this->data);
+        }
+    }
+
+    public function registration() {
+        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[User.username]');
+        $this->form_validation->set_message('is_unique', '{field} already exists');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('name', 'Name', 'required|alpha_numeric_spaces');
+        $this->form_validation->set_rules('surname', 'Last name', 'required|alpha_numeric_spaces');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[User.email]');
+        $this->form_validation->set_rules('date_of_birth', 'Date of birth', 'required');
+        $this->form_validation->set_rules('gender', 'Gender', 'required|in_list[m,f]');
+        $this->form_validation->set_rules('type', 'Account', 'required|in_list[s,b]');
+
+        if ($this->form_validation->run() == TRUE) {
+            $data = array(
+                'username' => $this->input->post('username'),
+                'password' => $this->input->post('password'),
+                'name' => $this->input->post('name'),
+                'surname' => $this->input->post('surname'),
+                'email' => $this->input->post('email'),
+                'date_of_birth' => $this->input->post('date_of_birth'),
+                'gender' => $this->input->post('gender'),
+                'type' => $this->input->post('type')
+            );
             $this->MUser->addUser($data);
             $user = $this->MUser->getUserByUsername($data['username']);
 
-            if ($user != null) {
-                $this->session->set_userdata('user', $user);
-                $this->redirectToType($user->type);
-            } else {
-                $this->registration("There was an error. Please try again.");
-            }
+            $this->session->set_userdata('user', $user);
+
+            $this->redirectToType();
+        } else {
+            $this->load->view("guest/registration", $this->data);
         }
     }
 
     private function redirectToType() {
-        $type = $this->session->userdata('user')->type;
-        switch ($type) {
+        switch ($this->session->userdata('user')->type) {
             case 'a':
                 redirect('Admin');
                 break;

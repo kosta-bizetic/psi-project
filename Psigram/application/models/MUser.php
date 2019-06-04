@@ -80,20 +80,6 @@ class MUser extends CI_Model {
         return $result;
     }
 
-    public function usernameExists($username) {
-        return $this->db->from('User')
-                        ->where('username', $username)
-                        ->get()
-                        ->row() != NULL;
-    }
-
-    public function emailExists($email) {
-        return $this->db->from('User')
-                        ->where('email', $email)
-                        ->get()
-                        ->row() != NULL;
-    }
-
     public function addUser($data) {
         $this->db->insert('user', $data);
     }
