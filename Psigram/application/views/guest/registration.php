@@ -28,8 +28,13 @@
 
                         <div class="form-group">
                           <label for="password">Password</label>
-                          <input type="password" class="form-control" id="password" name="password" value="<?php echo set_value('password'); ?>" placeholder="Password" required>
+                          <input type="password" id="password" class="form-control" name="password" value="<?php echo set_value('password'); ?>" placeholder="Password" required>
                           <?php echo form_error('password'); ?>
+                        </div>
+                        <div class="form-group">
+                          <label for="confirm-password">Confirm password</label>
+                          <input type="password" id="confirm-password" class="form-control" name="confirm-password" placeholder="Confirm password" onkeyup='check();' required>
+                          <span id='message'></span>
                         </div>
                         <div class="form-group">
                           <label for="name">Name</label>
@@ -84,10 +89,25 @@
                           </div>
                           <?php echo form_error('type'); ?>
                         </fieldset>
-                        <button type="submit" class="btn btn-primary">Register</button>
+                        <button type="submit" id="submit" class="btn btn-primary">Register</button>
                   </fieldset>
                 </form>
             </div>
         </div>
+
+        <script>
+            var check = function() {
+              if (document.getElementById('password').value ===
+                document.getElementById('confirm-password').value) {
+                document.getElementById('message').style.color = 'lightgreen';
+                document.getElementById('message').innerHTML = 'Matching';
+                document.getElementById('submit').disabled = false;
+              } else {
+                document.getElementById('message').style.color = 'lightred';
+                document.getElementById('message').innerHTML = 'Not matching';
+                document.getElementById('submit').disabled = true;
+              }
+            };
+        </script>
     </body>
 </html>
