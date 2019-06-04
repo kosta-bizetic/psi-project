@@ -22,8 +22,8 @@ class Business extends User {
         $this->data['user'] = $this->user;
         $this->data['follows'] = false;
 
-        $this->data['gender'] = null; // TODO
-        $this->data['age'] = null; // TODO
+        $this->data['gender'] = [5, 7]; // TODO
+        $this->data['age'] = [10, 3, 7, 5, 1]; // TODO
 
         $this->load->view('user/business/statistics.php', $this->data);
     }
