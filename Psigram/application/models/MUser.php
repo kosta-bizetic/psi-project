@@ -66,6 +66,20 @@ class MUser extends CI_Model {
                         ->result();
     }
 
+    public function getFollowersGenderStatistics($id_user) {
+        $genders = ['m', 'f'];
+        $result = [];
+        foreach ($genders as $gender) {
+            $num_of_followers = $this->db->from('Follows')
+                                         ->join('User', 'User.id_user = Follows.id_user_following')
+                                         ->where('Follows.id_user_followed', $id_user)
+                                         ->where('User.gender', $gender)
+                                         ->count_all_results();
+            array_push($result, $num_of_followers);
+        }
+        return $result;
+    }
+
     public function usernameExists($username) {
         return $this->db->from('User')
                         ->where('username', $username)
