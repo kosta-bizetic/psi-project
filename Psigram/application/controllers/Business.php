@@ -22,7 +22,20 @@ class Business extends User {
         $this->data['user'] = $this->user;
         $this->data['follows'] = false;
 
-        $this->data['gender'] = $this->MUser->getFollowersGenderStatistics($this->user->id_user);
+        $gender_translation = $this->config->item('gender_translation');
+
+        $genders = array();
+
+        foreach ($gender_translation as $translation) {
+            $genders[$translation] = 0;
+        }
+        $results = $this->MUser->getFollowersGenderStatistics($this->user->id_user);
+
+        foreach ($results as $result) {
+            $genders[$gender_translation[$result->gender]] += $result->num_followers;
+        }
+
+        $this->data['genders'] = $genders;
         $this->data['age'] = [10, 3, 7, 5, 1]; // TODO
 
         $this->load->view('user/business/statistics.php', $this->data);

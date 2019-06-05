@@ -1,13 +1,7 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of UserController
+ * Description of MUser
  *
  * @author LukaDojcilovic
  */
@@ -50,12 +44,25 @@ class MUser extends CI_Model {
                         ->result();
     }
 
+    private function prepareToGetFollowers($id_user) {
+        $this->db   ->from('Follows')
+                    ->join('User', 'User.id_user = Follows.id_user_following')
+                    ->where('Follows.id_user_followed', $id_user);
+    }
+
+
     public function getFollowers($id_user) {
-        return $this->db->from('Follows')
-                        ->join('User', 'User.id_user = Follows.id_user_following')
-                        ->where('Follows.id_user_followed', $id_user)
-                        ->get()
+        $this->prepareToGetFollowers($id_user);
+        return $this->db->get()
                         ->result();
+    }
+
+    public function getFollowersGenderStatistics($id_user) {
+        $this->prepareToGetFollowers($id_user);
+        $this->db   ->select('gender, COUNT(*) as num_followers')
+                    ->group_by('gender');
+
+        return $this->db->get()->result();
     }
 
     public function getFollowing($id_user) {
@@ -66,19 +73,7 @@ class MUser extends CI_Model {
                         ->result();
     }
 
-    public function getFollowersGenderStatistics($id_user) {
-        $genders = ['m', 'f'];
-        $result = [];
-        foreach ($genders as $gender) {
-            $num_of_followers = $this->db->from('Follows')
-                                         ->join('User', 'User.id_user = Follows.id_user_following')
-                                         ->where('Follows.id_user_followed', $id_user)
-                                         ->where('User.gender', $gender)
-                                         ->count_all_results();
-            array_push($result, $num_of_followers);
-        }
-        return $result;
-    }
+
 
     public function addUser($data) {
         $this->db->insert('user', $data);

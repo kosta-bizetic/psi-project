@@ -35,8 +35,7 @@ and open the template in the editor.
                     data: {
                             datasets: [{
                                     data: [
-                                        <?php echo $gender[0] ?>,
-                                        <?php echo $gender[1] ?>
+                                        <?php echo implode(', ', $genders); ?>
                                     ],
                                     backgroundColor: [
                                             'rgba(54, 162, 235, 0.5)',
@@ -45,8 +44,7 @@ and open the template in the editor.
                                     label: 'Gender'
                             }],
                             labels: [
-                                    'Male',
-                                    'Female'
+                                    <?php echo "'".implode("', '", array_keys($genders))."'"; ?>
                             ]
                     },
                     options: {
