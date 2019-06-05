@@ -82,6 +82,7 @@ class User extends PSIController {
         $this->form_validation->set_message('otherEmailDoesntExist', '{field} already exists');
         $this->form_validation->set_rules('date_of_birth', 'Date of birth', 'required');
         $this->form_validation->set_rules('gender', 'Gender', 'required|in_list[m,f]');
+        $this->form_validation->set_rules('submit', 'Submit', 'required|in_list[save]');
         if ($this->user->type != 'a') {
             $this->form_validation->set_rules('type', 'Account type', 'required|in_list[s,b]');
         } else {
@@ -108,6 +109,10 @@ class User extends PSIController {
 
             $this->redirectToType('profile');
         } else {
+            if ($this->input->post('submit') == 'cancel') {
+                $this->redirectToType('profile');
+            }
+
             $this->data['user'] = $this->user;
             $this->load->view('user/editProfile.php', $this->data);
         }
