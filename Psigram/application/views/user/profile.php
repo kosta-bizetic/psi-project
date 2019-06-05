@@ -20,6 +20,8 @@
             foreach ($posts as $post) {
                 $this->load->view('user/partial/singlePost', ['post' => $post, 'redirectPage' => "profile/".$post->id_user, 'show_comments_link' => true]);
             }
+
+            $this->load->view('user/partial/likeHandlerScript.php');
         ?>
 
     </body>

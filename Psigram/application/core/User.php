@@ -123,14 +123,33 @@ class User extends PSIController {
         $this->redirectToLastURI();
     }
 
-    public function likeHandler($id_post, $likes) {
+    private function generateLikesText($likes, $num_likes) {
+        if ($likes) {
+            if ($num_likes == 2) {
+                print 'You and '.($num_likes - 1).' other like this.';
+            } else if ($num_likes == 1) {
+                print 'You like this.';
+            } else {
+                print 'You and '.($num_likes - 1).' others like this.';
+            }
+        } else {
+            if ($num_likes == 1) {
+                print $num_likes.' person likes this.';
+            } else {
+                print $num_likes.' people like this.';
+            }
+        }
+    }
+
+    public function likeHandler($id_post) {
+        $likes = $this->MLikes->getLikesExist($this->user->id_user, $id_post);
         if (!$likes) {
             $this->MLikes->addLikes($this->user->id_user, $id_post);
         } else {
             $this->MLikes->removeLikes($this->user->id_user, $id_post);
         }
-
-        $this->redirectToLastURI();
+        $num_likes = $this->MPost->getNumberOfLikes($id_post)->num_likes;
+        $this->generateLikesText(!$likes, $num_likes);
     }
 
     public function post($id_post) {

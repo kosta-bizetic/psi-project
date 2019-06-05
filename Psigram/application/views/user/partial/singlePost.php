@@ -16,11 +16,11 @@
             </div>
             <br/>
             <div style="text-align: center">
-                <img ondblclick="location.href='<?php echo site_url("$this->class_name/likeHandler/".$post->id_post."/".$post->likes)?>'" src="<?php echo base_url('/uploads/'.$post->image_name) ?>" class="img-fluid">
+                <img ondblclick="likeHandler(<?php echo "$post->id_post" ?>)" src="<?php echo base_url('/uploads/'.$post->image_name) ?>" class="img-fluid">
             </div>
             <div style="text-align: center">
                 <a href="<?php echo site_url("$this->class_name/likers/$post->id_post") ?>">
-                    <strong style="float:left">
+                    <strong id="<?php echo 'LikeText'.$post->id_post ?>" style="float:left">
                         <?php
                             if ($post->likes) {
                                 if ($post->num_likes == 2) {

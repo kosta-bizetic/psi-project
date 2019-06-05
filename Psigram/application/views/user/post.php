@@ -13,6 +13,8 @@ and open the template in the editor.
             $this->load->view('user/partial/header.php', $this->data);
 
             $this->load->view('user/partial/singlePost.php', ['post' => $post, 'show_comments_link' => false]);
+
+            $this->load->view('user/partial/likeHandlerScript.php');
         ?>
 
         <div class='container-fluid'>

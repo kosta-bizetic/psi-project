@@ -81,6 +81,14 @@ class MPost extends CI_Model {
                     ->update();
     }
 
+    public function getNumberOfLikes($id_post) {
+        return $this->db->select('num_likes')
+                        ->from('Post')
+                        ->where('id_post', $id_post)
+                        ->get()
+                        ->row();
+    }
+
     public function getPost($id_post) {
         return $this->db->from("Post")
                         ->where("id_post", $id_post)

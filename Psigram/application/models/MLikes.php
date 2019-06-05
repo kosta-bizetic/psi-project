@@ -19,7 +19,7 @@ class MLikes extends CI_Model {
     public function getLikesExist($id_user, $id_post) {
         return $this->db->from('Likes')
                         ->where('id_user', $id_user)
-                        ->and_where('id_post', $id_post)
+                        ->where('id_post', $id_post)
                         ->get()
                         ->row() != NULL;
     }
@@ -46,4 +46,5 @@ class MLikes extends CI_Model {
                     ->where('id_post', $id_post)
                     ->delete();
     }
+
 }

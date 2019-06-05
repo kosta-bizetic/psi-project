@@ -14,7 +14,7 @@
             }
         </style>
     </head>
-    <body style='background-image: url("<?php echo base_url('/assets/backgroundImage.jpg') ?>")'>
+    <body style='background-image: url("<?php echo base_url('/assets/images/backgroundImage.jpg') ?>")'>
         <?php $this->load->view('guest/partial/header.php'); ?>
         <div class="container-fluid" style="padding-top: 2%">
             <div class="row">
@@ -38,7 +38,7 @@
                           <?php echo form_error('confirm-password'); ?>
                           <span id='message'></span>
                         </div>
-                        
+
                         <div class="form-group">
                           <label for="name">Name</label>
                           <input type="text" class="form-control" id="name" name="name" value="<?php echo set_value('name'); ?>" placeholder="Name" required>

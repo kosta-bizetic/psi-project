@@ -11,6 +11,8 @@
             foreach ($posts as $post) {
                 $this->load->view('user/partial/singlePost', ['post' => $post, 'redirectPage' => 'feed', 'show_comments_link' => true]);
             }
+
+            $this->load->view('user/partial/likeHandlerScript.php');
         ?>
     </body>
 </html>

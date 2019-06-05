@@ -11,7 +11,7 @@
             }
         </style>
     </head>
-    <body style='background-image: url("<?php echo base_url('/assets/backgroundImage.jpg') ?>")'>
+    <body style='background-image: url("<?php echo base_url('/assets/images/backgroundImage.jpg') ?>")'>
 
         <?php $this->load->view('guest/partial/header.php'); ?>
 
