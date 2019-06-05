@@ -18,25 +18,29 @@ class Business extends User {
         }
     }
 
-    public function statistics() {
-        $this->data['user'] = $this->user;
-        $this->data['follows'] = false;
-
+    private function getGenderStatistics() {
         $gender_translation = $this->config->item('gender_translation');
 
         $genders = array();
-
         foreach ($gender_translation as $translation) {
             $genders[$translation] = 0;
         }
-        $results = $this->MUser->getFollowersGenderStatistics($this->user->id_user);
 
+        $results = $this->MUser->getFollowersGenderStatistics($this->user->id_user);
         foreach ($results as $result) {
             $genders[$gender_translation[$result->gender]] += $result->num_followers;
         }
 
-        $this->data['genders'] = $genders;
-        $this->data['age'] = [10, 3, 7, 5, 1]; // TODO
+        return $genders;
+    }
+
+
+    public function statistics() {
+        $this->data['user'] = $this->user;
+        $this->data['follows'] = false;
+
+        $this->data['genders'] = $this->getGenderStatistics();
+        $this->data['age'] = $this->MUser->getFollowersAgeStatistics($this->user->id_user);
 
         $this->load->view('user/business/statistics.php', $this->data);
     }

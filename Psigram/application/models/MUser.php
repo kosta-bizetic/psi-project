@@ -65,6 +65,19 @@ class MUser extends CI_Model {
         return $this->db->get()->result();
     }
 
+    public function getFollowersAgeStatistics($id_user) {
+        $age_bounds = array(array(18, 25), array(26, 40), array(41, 60), array(61, 80), array(81, 1000));
+        $age = array();
+        foreach ($age_bounds as $age_bound) {
+            $this->prepareToGetFollowers($id_user);
+            $this->db   ->where("TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) >=", $age_bound[0])
+                        ->where("TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) <=", $age_bound[1]);
+            array_push($age, $this->db->count_all_results());
+        }
+        
+        return $age;
+    }
+
     public function getFollowing($id_user) {
         return $this->db->from('Follows')
                         ->join('User', 'User.id_user = Follows.id_user_followed')
