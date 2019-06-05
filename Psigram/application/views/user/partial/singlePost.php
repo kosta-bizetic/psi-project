@@ -1,7 +1,7 @@
 
-<div class="container-fluid" style="padding: 1%">
+<div class="container-fluid" style='background-color: lightsteelblue; padding-top: 0px; padding-bottom: 0px'>
     <div class="row justify-content-center">
-        <div class="col-md-4">
+        <div class="col-md-4" style="background-color: white; margin-top: 1em; border: 1px solid rgb(0, 123, 255);  border-radius: 20px">
             <div style="text-align: center;">
                 <a href="<?php echo site_url("$this->class_name/profile/$post->id_user") ?>"><strong style="float:left">@<?php echo $post->username ?></strong></a>
                 <?php

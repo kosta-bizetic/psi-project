@@ -1,7 +1,7 @@
 
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <table class="table col-md-8">
+        <table class="table col-md-8" style="margin-bottom: 0px">
             <tbody>
               <tr class="table-primary">
                     <th scope="row">@<?php echo $user->username; ?></th>
