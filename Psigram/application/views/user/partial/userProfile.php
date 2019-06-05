@@ -1,9 +1,9 @@
 
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <table class="table col-md-8" style="margin-bottom: 0px">
+        <table class="table col-md-8">
             <tbody>
-              <tr class="table-primary">
+                <tr>
                     <th scope="row">@<?php echo $user->username; ?></th>
                     <td><?php echo $user->name.' '.$user->surname; ?></td>
 
@@ -29,7 +29,7 @@
 
                     <td><?php echo $user->num_posts; ?><br>Posts</td>
                     <td><a href="<?php echo site_url("$this->class_name/followers/".$user->id_user)?>"><?php echo $user->num_followers; ?><br>Followers</a></td>
-                    <td><a href="<?php echo site_url("$this->class_name/following/".$user->id_user)?>"><?php echo $user->num_following; ?><br>Following</a></td>
+                    <td id="rightTD"><a href="<?php echo site_url("$this->class_name/following/".$user->id_user)?>"><?php echo $user->num_following; ?><br>Following</a></td>
                 </tr>
             </tbody>
         </table>

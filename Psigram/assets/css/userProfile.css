@@ -1,0 +1,30 @@
+table {
+    margin-top: 0.5em;
+    margin-bottom: 0px !important;
+    border-collapse: separate;
+    border-spacing: 0px;
+}
+
+tr {
+    background-color: white;
+
+}
+
+th {
+    border-left: 1px solid rgb(0, 123, 255);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+th, td {
+    text-align:center;
+    vertical-align:middle;
+    border-top: 1px solid rgb(0, 123, 255)!important;
+    border-bottom: 1px solid rgb(0, 123, 255);
+}
+
+#rightTD {
+    border-right: 1px solid rgb(0, 123, 255);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}

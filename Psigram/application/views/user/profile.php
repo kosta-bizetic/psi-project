@@ -3,13 +3,7 @@
 <html>
     <head>
         <?php $this->load->view('partial/head.php', $this->data); ?>
-
-        <style>
-            th, td {
-                text-align:center;
-                vertical-align:middle;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('/assets/css/userProfile.css') ?>">
     </head>
     <body>
         <?php

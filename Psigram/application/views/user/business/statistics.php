@@ -8,12 +8,7 @@ and open the template in the editor.
     <head>
         <?php $this->load->view('partial/head.php', $this->data); ?>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
-        <style>
-            th, td {
-                text-align:center;
-                vertical-align:middle;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('/assets/css/userProfile.css') ?>">
     </head>
     <body>
         <?php
