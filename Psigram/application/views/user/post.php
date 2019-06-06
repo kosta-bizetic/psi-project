@@ -7,6 +7,33 @@ and open the template in the editor.
 <html>
     <head>
         <?php $this->load->view('partial/head.php', $this->data); ?>
+        <style>
+            table {
+                margin: 0.5em 0em;
+                border-collapse: separate;
+                border-spacing: 0px;
+            }
+            tr {
+                background-color: white;
+            }
+            th {
+                text-align: center;
+                border-top: 1px solid rgb(0, 123, 255);
+                border-bottom: 1px solid rgb(0, 123, 255);
+                border-left: 1px solid rgb(0, 123, 255);
+                border-top-left-radius: 20px;
+                border-bottom-left-radius: 20px;
+            }
+            td {
+                border-top: 1px solid rgb(0, 123, 255);
+                border-bottom: 1px solid rgb(0, 123, 255);
+            }
+            #rightTD {
+                border-right: 1px solid rgb(0, 123, 255);
+                border-top-right-radius: 20px;
+                border-bottom-right-radius: 20px;
+            }
+        </style>
     </head>
     <body>
         <?php
@@ -18,19 +45,19 @@ and open the template in the editor.
         <div class='container-fluid'>
             <div class='row justify-content-center'>
                 <div class="col-md-4">
-                    <table class='table' style="table-layout: fixed; width: 100%">
+                    <table  style="table-layout: fixed; width: 100%">
                         <tbody>
                             <?php
                                 foreach ($comments as $comment) {
-                                    echo "<tr class='table-primary'>
+                                    echo "<tr>
                                             <th scope='row'><a href='".site_url("$this->class_name/profile/$comment->id_user")."'>@".$comment->username."</a></td>
                                             <td style='word-wrap: break-word; width: 60%'>$comment->text</td>
                                             <td style='float:right; text-align:center'>".substr($comment->timestamp, 0, 16)."</td>
-                                            <td style='width: 5%'>";
+                                            <td id='rightTD' style='width: 5%'>";
 
                                     if ($this->user->type == "a" ||
                                             $this->user->id_user == $comment->id_user) {
-                                        echo '<a href="'.site_url("$this->class_name/deleteCommentHandler/$comment->id_comment").'">X</a>';
+                                        echo '<a href="'.site_url("$this->class_name/deleteCommentHandler/$comment->id_comment").'"><strong>X</strong></a>';
                                     }
 
                                     echo "  </td>
