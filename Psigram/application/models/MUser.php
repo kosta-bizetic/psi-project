@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Description of MUser
- *
- * @author LukaDojcilovic
- */
+
 class MUser extends CI_Model {
     public function __construct() {
         parent::__construct();
@@ -74,7 +70,7 @@ class MUser extends CI_Model {
                         ->where("TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) <=", $age_bound[1]);
             array_push($age, $this->db->count_all_results());
         }
-        
+
         return $age;
     }
 
