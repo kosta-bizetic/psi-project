@@ -226,7 +226,7 @@ class User extends PSIController {
         } else {
             $this->MLikes->removeLikes($this->user->id_user, $id_post);
         }
-        $num_likes = $this->MPost->getNumberOfLikes($id_post)->num_likes;
+        $num_likes = $this->MPost->getPost($id_post)->num_likes;
         $this->generateLikesText(!$likes, $num_likes);
     }
 
