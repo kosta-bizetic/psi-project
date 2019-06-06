@@ -33,17 +33,17 @@ and open the template in the editor.
                                         <?php echo implode(', ', $genders); ?>
                                     ],
                                     backgroundColor: [
-                                            'rgba(54, 162, 235, 0.5)',
-                                            'rgba(255, 99, 132, 0.5)',
+                                        'rgba(54, 162, 235, 0.5)',
+                                        'rgba(255, 99, 132, 0.5)',
                                     ],
                                     label: 'Gender'
                             }],
                             labels: [
-                                    <?php echo "'".implode("', '", array_keys($genders))."'"; ?>
+                                <?php echo "'".implode("', '", array_keys($genders))."'"; ?>
                             ]
                     },
                     options: {
-                            responsive: true
+                        responsive: true
                     }
             });
 
@@ -64,11 +64,11 @@ and open the template in the editor.
                                     xAxisID: 0
                             }],
                             labels: [
-                                    '18-25',
-                                    '26-40',
-                                    '41-60',
-                                    '61-80',
-                                    '81+'
+                                '18-25',
+                                '26-40',
+                                '41-60',
+                                '61-80',
+                                '81+'
                             ]
 
                     },
