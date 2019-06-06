@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Luka Dojcilovic 2016/0135
- * @author Kosta Bizetic 2016/0135
+ * @author Kosta Bizetic 2016/0121
  */
 
 require_once APPPATH.'\\core\\PSIController.php';

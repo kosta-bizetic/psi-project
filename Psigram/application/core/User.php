@@ -1,16 +1,28 @@
 <?php
+/**
+ * @author Luka Dojcilovic 2016/0135
+ * @author Kosta Bizetic 2016/0121
+ */
 
 require_once 'PSIController.php';
 
 /**
- * Description of User
+ * User - Root controller for the all user types.
  *
- * @author Kosta
+ * @version 1.0
  */
 class User extends PSIController {
 
+    /**
+     * @var stdClass $user - Object containing information of the session user.
+     */
     var $user;
 
+    /**
+    * Creating a new instance.
+    *
+    * @return void
+     */
     public function __construct() {
         parent::__construct();
         if (! ($this->session->has_userdata('user'))) {
@@ -27,20 +39,40 @@ class User extends PSIController {
         $this->user = $this->session->userdata['user'];
     }
 
+    /**
+     * Default method for calls to this controller.
+     *
+     * @return void
+     */
     public function index() {
         redirect("$this->class_name/feed");
     }
 
+    /**
+     * Method that loads the feed view.
+     *
+     * @return void
+     */
     public function feed() {
         $this->data['posts'] = $this->MPost->getPostsForFeed($this->user);
 
         $this->load->view('user/feed.php', $this->data);
     }
 
+    /**
+     * Method that loads the add post view.
+     *
+     * @return void
+     */
     public function addPost() {
         $this->load->view('user/addPost.php', $this->data);
     }
 
+    /**
+     * Method that handles adding posts from the add posts view.
+     *
+     * @return void
+     */
     public function addPostHandler() {
         $config['upload_path']          = 'uploads//';
         $config['file_name']            = $this->user->username."_".time();
@@ -61,6 +93,13 @@ class User extends PSIController {
         }
     }
 
+    /**
+     * Method that loads the profile view of a given user.
+     *
+     * @param int $user_id - ID of the users whose profile should be loaded.
+     *
+     * @return void
+     */
     public function profile($user_id=NULL) {
         $profile_user = $this->user;
         if ($user_id != NULL) {
@@ -72,6 +111,11 @@ class User extends PSIController {
         $this->load->view('user/profile.php', $this->data);
     }
 
+    /**
+     * Method that loads the edit profile view.
+     *
+     * @return void
+     */
     public function editProfile() {
         $this->form_validation->set_rules('username', 'Username', array('required', array('otherUsernameDoesntExist', array($this->MUser, "otherUsernameDoesntExist"))));
         $this->form_validation->set_message('otherUsernameDoesntExist', '{field} already exists');
@@ -118,16 +162,38 @@ class User extends PSIController {
         }
     }
 
+    /**
+     * Method that handles the session user following a given user.
+     *
+     * @param int $id_user_followed - ID of the user to follow.
+     *
+     * @return void
+     */
     public function followHandler($id_user_followed) {
         $this->MFollows->addFollows($this->user->id_user, $id_user_followed);
         $this->redirectToLastURI();
     }
 
+    /**
+     * Method that handles the session user unfollowing a given user.
+     *
+     * @param int $id_user_followed ID of the user to be unfollowed.
+     *
+     * @return void
+     */
     public function unfollowHandler($id_user_followed) {
         $this->MFollows->removeFollows($this->user->id_user, $id_user_followed);
         $this->redirectToLastURI();
     }
 
+    /**
+     * Method that generates the like text that should be written under a post.
+     *
+     * @param bool $likes - Does the session user like the given post.
+     * @param int $num_likes - The number of likes the post has.
+     *
+     * @return void
+     */
     private function generateLikesText($likes, $num_likes) {
         if ($likes) {
             if ($num_likes == 2) {
@@ -146,6 +212,13 @@ class User extends PSIController {
         }
     }
 
+    /**
+     * Method that handles the session user liking/unliking a given post.
+     *
+     * @param int $id_post - ID of the post to be liked/unliked
+     *
+     * @return void
+     */
     public function likeHandler($id_post) {
         $likes = $this->MLikes->getLikesExist($this->user->id_user, $id_post);
         if (!$likes) {
@@ -157,6 +230,13 @@ class User extends PSIController {
         $this->generateLikesText(!$likes, $num_likes);
     }
 
+    /**
+     * Method that loads the post view of a given post.
+     *
+     * @param int $id_post - ID of the post for which the view should be loaded.
+     *
+     * @return void
+     */
     public function post($id_post) {
         $post = $this->MPost->getSinglePost($id_post);
         if ($post == NULL) {
@@ -172,6 +252,13 @@ class User extends PSIController {
         $this->load->view('user/post.php', $this->data);
     }
 
+    /**
+     * Method that handles the session user adding a comment to a given post.
+     *
+     * @param int $id_post - ID of the post to which the comment should be added.
+     *
+     * @return void
+     */
     public function addCommentHandler($id_post) {
         $comment_text = $this->input->post('comment_text');
         if ( ! empty($comment_text)) {
@@ -180,11 +267,21 @@ class User extends PSIController {
         $this->redirectToLastURI();
     }
 
+    /**
+     * Method that handles the session user logging out.
+     *
+     * @return void
+     */
     public function logOut() {
         $this->session->unset_userdata('user');
         redirect();
     }
 
+    /**
+     * Method that handles searching for users and loads the corresponding user list view.
+     *
+     * @return void
+     */
     public function search() {
         $search_text = $this->input->post('search_text');
         $this->data['users'] = $this->MUser->searchUsers($search_text);
@@ -192,24 +289,50 @@ class User extends PSIController {
         $this->load->view('user/userList.php', $this->data);
     }
 
+    /**
+     * Method that loads the user list with all the users that liked a given post.
+     *
+     * @param int $post_id - ID of the post for which the likers should be shown.
+     *
+     * @return void
+     */
     public function likers($post_id) {
         $this->data['users'] = $this->MLikes->getPostLikers($post_id);
 
         $this->load->view('user/userList.php', $this->data);
     }
 
+    /**
+     * Method the loads the user list view with all the users that follow the session user.
+     *
+     * @param int $user_id - ID of the user whose followers should be shown.
+     *
+     * @return void
+     */
     public function followers($user_id) {
         $this->data['users'] = $this->MUser->getFollowers($user_id);
 
         $this->load->view('user/userList.php', $this->data);
     }
 
+    /**
+     * Method that loads the user list view with all the users the session user follows.
+     *
+     * @param int $user_id - ID of the user whose following should be shown.
+     */
     public function following($user_id) {
         $this->data['users'] = $this->MUser->getFollowing($user_id);
 
         $this->load->view('user/userList.php', $this->data);
     }
 
+    /**
+     * Method that handles the deletion of a given comment made by session user.
+     *
+     * @param int $id_comment - ID of the comment to be deleted.
+     *
+     * @return void
+     */
     public function deleteCommentHandler($id_comment) {
         $comment = $this->MComment->getComment($id_comment);
         if ($comment->id_user == $this->user->id_user) {
@@ -220,6 +343,13 @@ class User extends PSIController {
         }
     }
 
+    /**
+     * Method that handles the deletion of a given post uploaded by the session user.
+     *
+     * @param int $id_post - ID of the post to be deleted.
+     *
+     * @return void
+     */
     public function deletePostHandler($id_post) {
         $post = $this->MPost->getPost($id_post);
         if ($post->id_user == $this->user->id_user) {

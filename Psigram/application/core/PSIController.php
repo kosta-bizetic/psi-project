@@ -1,14 +1,17 @@
 <?php
-
 /**
- * Description of PSIController
- *
- * @author Kosta
+ * @author Kosta Bizetic 2016/0121
  */
+
 class PSIController extends CI_Controller {
     var $data = array();
     var $class_name;
 
+    /**
+    * Creating a new instance.
+    *
+    * @return void
+     */
     public function __construct() {
         parent::__construct();
 

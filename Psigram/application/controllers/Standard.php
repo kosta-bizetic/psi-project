@@ -1,13 +1,13 @@
 <?php
 /**
  * @author Luka Dojcilovic 2016/0135
- * @author Kosta Bizetic 2016/0135
+ * @author Kosta Bizetic 2016/0121
  */
 
 require_once APPPATH.'\\core\\User.php';
 
 /**
- * Standard - Controller for the standard user type
+ * Standard - Controller for the standard user type.
  *
  * @version 1.0
  */

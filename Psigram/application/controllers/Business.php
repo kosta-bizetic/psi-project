@@ -1,14 +1,13 @@
 <?php
 /**
  * @author Luka Dojcilovic 2016/0135
- * @author Kosta Bizetic 2016/0135
+ * @author Kosta Bizetic 2016/0121
  */
-
 
 require_once APPPATH.'\\core\\User.php';
 
 /**
- * Business - Controller for the business user type
+ * Business - Controller for the business user type.
  *
  * @version 1.0
  */
@@ -31,7 +30,7 @@ class Business extends User {
     /**
      * Method that returns the users follower distribution by gender.
      *
-     * @return Array() - Number of followers per gender.
+     * @return Array $genders - Number of followers per gender.
      */
     private function getGenderStatistics() {
         $gender_translation = $this->config->item('gender_translation');
@@ -67,7 +66,7 @@ class Business extends User {
     /**
      * Method that handles promoting/unpromoting posts.
      *
-     * @param $id_post ID of post to be promoted/unpromoted.
+     * @param int $id_post - ID of post to be promoted/unpromoted.
      *
      * @return void
      */
