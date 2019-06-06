@@ -28,8 +28,7 @@ class PSIController extends CI_Controller {
      */
     public function _remap($method, $params = array())
     {
-        return $this->data['posttitle'] = implode(' ', preg_split('/(?=[A-Z])/', ucfirst($method)));
-        $this->preparePosttitle($method);
+        $this->data['posttitle'] = implode(' ', preg_split('/(?=[A-Z])/', ucfirst($method)));
         $this->data['title'] = 'Psigram';
         $this->class_name = get_class($this);
 
