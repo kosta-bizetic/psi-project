@@ -1,3 +1,9 @@
+<?php
+/**
+ * @author Luka Dojcilovic 2016/0135
+ * @author Kosta Bizetic 2016/0121
+ */
+?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="<?php echo site_url("Guest/login")?>">Psigram</a>

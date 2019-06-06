@@ -1,5 +1,11 @@
-<!DOCTYPE html>
+<?php
+/**
+ * @author Luka Dojcilovic 2016/0135
+ * @author Kosta Bizetic 2016/0121
+ */
+?>
 
+<!DOCTYPE html>
 <html>
     <head>
         <?php $this->load->view('partial/head.php', $this->data); ?>

@@ -1,5 +1,11 @@
-<!DOCTYPE html>
+<?php
+/**
+ * @author Luka Dojcilovic 2016/0135
+ * @author Kosta Bizetic 2016/0121
+ */
+?>
 
+<!DOCTYPE html>
 <html>
     <head>
 
@@ -104,6 +110,14 @@
         </div>
 
         <script>
+            <?php
+            /**
+             * Function that checks whether the password and confirm password
+             * field match and updates the view accordingly.
+             *
+             * @returns void
+             */
+            ?>
             var check = function() {
               if (document.getElementById('password').value ===
                 document.getElementById('confirm-password').value) {
