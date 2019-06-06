@@ -18,7 +18,6 @@ class Guest extends PSIController {
     *
     * @return void
      */
-
     public function __construct() {
         parent::__construct();
         if ($this->session->has_userdata('user')) {

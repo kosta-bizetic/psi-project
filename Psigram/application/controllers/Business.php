@@ -1,14 +1,24 @@
 <?php
+/**
+ * @author Luka Dojcilovic 2016/0135
+ * @author Kosta Bizetic 2016/0135
+ */
+
 
 require_once APPPATH.'\\core\\User.php';
 
 /**
- * Description of Business
+ * Business - Controller for the business user type
  *
- * @author Kosta
+ * @version 1.0
  */
 class Business extends User {
 
+    /**
+    * Creating a new instance.
+    *
+    * @return void
+     */
     public function __construct() {
         parent::__construct();
 
@@ -18,6 +28,11 @@ class Business extends User {
         }
     }
 
+    /**
+     * Method that returns the users follower distribution by gender.
+     *
+     * @return Array() - Number of followers per gender.
+     */
     private function getGenderStatistics() {
         $gender_translation = $this->config->item('gender_translation');
 
@@ -34,7 +49,11 @@ class Business extends User {
         return $genders;
     }
 
-
+    /**
+     * Method that loads the statics view.
+     *
+     * @return void
+     */
     public function statistics() {
         $this->data['user'] = $this->user;
         $this->data['follows'] = false;
@@ -45,6 +64,13 @@ class Business extends User {
         $this->load->view('user/business/statistics.php', $this->data);
     }
 
+    /**
+     * Method that handles promoting/unpromoting posts.
+     *
+     * @param $id_post ID of post to be promoted/unpromoted.
+     *
+     * @return void
+     */
     public function sponsorHandler($id_post) {
         $post = $this->MPost->getPost($id_post);
         if ($post->id_user == $this->user->id_user) {

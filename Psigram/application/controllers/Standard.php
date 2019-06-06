@@ -1,13 +1,23 @@
 <?php
+/**
+ * @author Luka Dojcilovic 2016/0135
+ * @author Kosta Bizetic 2016/0135
+ */
 
 require_once APPPATH.'\\core\\User.php';
 
 /**
- * Description of Standard
+ * Standard - Controller for the standard user type
  *
- * @author Kosta
+ * @version 1.0
  */
 class Standard extends User {
+
+    /**
+    * Creating a new instance.
+    *
+    * @return void
+     */
     public function __construct() {
         parent::__construct();
 
