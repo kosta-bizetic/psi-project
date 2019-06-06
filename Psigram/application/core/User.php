@@ -177,7 +177,7 @@ class User extends PSIController {
     /**
      * Method that handles the session user unfollowing a given user.
      *
-     * @param int $id_user_followed ID of the user to be unfollowed.
+     * @param int $id_user_followed - ID of the user to be unfollowed.
      *
      * @return void
      */
