@@ -1,13 +1,23 @@
 <?php
+/**
+ * @author Luka Dojcilovic 2016/0135
+ * @author Kosta Bizetic 2016/0135
+ */
 
 require_once APPPATH.'\\core\\PSIController.php';
 
 /**
- * Description of Guest
- *
- * @author LukaDojcilovic
- */
+* Guest – Controller for users not logged in to the system.
+*
+* @version 1.0
+*/
 class Guest extends PSIController {
+
+    /**
+    * Creating a new instance.
+    *
+    * @return void
+     */
 
     public function __construct() {
         parent::__construct();
@@ -18,10 +28,20 @@ class Guest extends PSIController {
         $this->load->model('MUser');
     }
 
+    /**
+     * Default method for calls to this controller.
+     *
+     * @return void
+     */
     public function index() {
         redirect("$this->class_name/logIn");
     }
 
+    /**
+     * Method that loads the log in view and handles the log in procedure.
+     *
+     * @return void
+     */
     public function logIn() {
         $this->form_validation->set_rules('username', 'Username');
         $this->form_validation->set_rules('password', 'Password', array(array('logInValidation', array($this->MUser, 'logInValidation'))));
@@ -34,6 +54,11 @@ class Guest extends PSIController {
         }
     }
 
+    /**
+     * Method that loads the registration view and handles the registration procedure.
+     *
+     * @return void.
+     */
     public function registration() {
         $this->form_validation->set_rules('username', 'Username', 'required|is_unique[User.username]');
         $this->form_validation->set_message('is_unique', '{field} already exists');
