@@ -24,7 +24,7 @@
                             echo '<td><a href="'.site_url("$this->class_name/editProfile").'"><button type="button" class="btn btn-primary">Edit Profile</button></a></td>';
                         }
 
-                        if ($this->session->userdata['user']->type == 'b') {
+                        if ($this->session->userdata['user']->id_user == $user->id_user && $this->session->userdata['user']->type == 'b') {
                             echo '<td><a href="'.site_url("$this->class_name/statistics").'"><button type="button" class="btn btn-primary">Statistics</button></a></td>';
                         }
 
